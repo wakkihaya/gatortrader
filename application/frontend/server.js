@@ -1,25 +1,53 @@
-const http = require('http');
-const fs = require('fs');
+var express = require('express');
+var app = express();
+var path = require('path');
 
-const hostname = '127.0.0.1';
-const port = 3000;
+var dir = path.join(__dirname, 'public');
 
-const server = http.createServer((req, res) => {
-  if(req.url.endsWith('.html')) {
-    const htmlFile = req.url.slice(1);
-    fs.stat(`./${htmlFile}`, (err, stats) => {
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/html');
-      if(stats) {
-        fs.createReadStream(htmlFile).pipe(res);
-      } else {
-      	res.statusCode = 404;
-        res.end('Sorry, page not found');
-      }
-    });
-  }
+app.use(express.static(dir));
+
+
+
+app.get('/',(req, res)=>{
+	res.sendFile(__dirname + '/public/index.html');
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.get('/index',(req, res)=>{
+        res.sendFile(__dirname + '/public/index.html');
+});
+
+app.get('/aboutUs',(req, res)=>{
+	res.sendFile(__dirname + '/public/aboutUs.html');
+});
+
+app.get('/aboutAnmol',(req, res)=>{
+        res.sendFile(__dirname + '/public/aboutAnmol.html');
+});
+
+app.get('/aboutAnton',(req, res)=>{
+        res.sendFile(__dirname + '/public/aboutAnton.html');
+});
+
+app.get('/aboutDann',(req, res)=>{
+	res.sendFile(__dirname + '/public/aboutDann.html');
+});
+
+app.get('/aboutGrayson',(req, res)=>{
+        res.sendFile(__dirname + '/public/aboutGrayson.html');
+});
+
+app.get('/aboutHayato',(req, res)=>{
+        res.sendFile(__dirname + '/public/aboutHayato.html');
+});
+
+app.get('/aboutSamjot',(req, res)=>{
+        res.sendFile(__dirname + '/public/aboutSamjot.html');
+});
+
+app.get('/*',(req, res)=>{
+	res.sendFile(__dirname + '/public/index.html');
+});
+
+app.listen(3000, function(req, res){
+	console.log('Express JS is ready for port 3000');
 });

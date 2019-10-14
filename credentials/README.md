@@ -24,7 +24,7 @@
 ## You may store the most of the above in this README.md file. DO NOT Store the SSH key or any keys in this README.md file.
 
 # Required Items (up to M0):
-    1. http://ec2-54-183-26-186.us-west-1.compute.amazonaws.com/index.html
+    1. http://54.67.101.141/
     2. ubuntu
     3. found in Team05KeyPair.pem 
         Note: server.js is running in the background even when logged off and it must restarted with "node <relative filepath>server.js" if it is ever killed
