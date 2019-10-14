@@ -26,7 +26,8 @@
 # Required Items (up to M0):
     1. http://54.67.101.141/
     2. ubuntu
-    3. found in Team05KeyPair.pem
+    3. found in Team05KeyPair.pem 
+        Note: server.js is running in the background even when logged off and it must restarted with "node <relative filepath>server.js" if it is ever killed
     4. - 7. Database setup not required in M0, per instructions.
     8. 
         Step 1: Download Team05KeyPair.pem and save it onto your terminal
