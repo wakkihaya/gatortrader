@@ -61,7 +61,7 @@ Make a note of the root password you choose to use.
 ```
 mysql --version
 ```
-You should see output like this: `Ver 14.14 Distrib 5.7.27, for Linux (x86_64) using  EditLine wrapper`
+You should see output like this: `Ver 14.14 Distrib 5.7.27, for Linux (x86_64) using  EditLine wrapper`.
 If your Distrib version number is less than 5.7.6, then you should initialize the data directory:
 ```
 sudo mysql_install_db

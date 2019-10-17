@@ -1,1 +1,1 @@
-# `tests` subdirectory
+# `tests/` subdirectory

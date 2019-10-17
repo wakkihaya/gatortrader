@@ -1,1 +1,1 @@
-# `controllers` subdirectory
+# `controllers/` subdirectory

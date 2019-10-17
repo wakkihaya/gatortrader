@@ -1,1 +1,1 @@
-# `models` subdirectory
+# `models/` subdirectory

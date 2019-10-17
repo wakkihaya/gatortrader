@@ -1,1 +1,1 @@
-# `helpers` subdirectory
+# `helpers/` subdirectory

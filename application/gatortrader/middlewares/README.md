@@ -1,1 +1,1 @@
-# `middlewares` subdirectory
+# `middlewares/` subdirectory
