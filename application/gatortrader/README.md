@@ -11,8 +11,8 @@ The GatorTrader express app was created with the following steps:
 `npm install -g express-generator`
 
 ### 4. Create a ".gitignore" file and populate it with the following lines:
-`node_modules`
-`.DS_Store`
+`node_modules
+.DS_Store`
 
 ### 5. Create the following subdirectories:
 * controllers
@@ -38,8 +38,8 @@ The GatorTrader express app was created with the following steps:
 * views/
 
 ### 7. Move into "models" and install mysql:
-`sudo apt-get update'
-`sudo apt-get install mysql-server'
+`sudo apt-get update
+sudo apt-get install mysql-server`
 
 ### 8. Make a note of the root password you choose to use.
 
