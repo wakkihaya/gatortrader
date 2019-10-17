@@ -40,7 +40,7 @@ controllers/
 helpers/
 middlewares/
 models/
-package.josn
+package.json
 public/
 README.md
 routes/
