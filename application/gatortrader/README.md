@@ -5,10 +5,14 @@
 ### 1. Create "gatortrader" subdirectory in the "application" directory and move into "gatortrader".
 
 ### 2. Install express globally:
-`npm install -g express`
+```
+npm install -g express
+```
 
 ### 3. Install express generator globally:
-`npm install -g express-generator`
+```
+npm install -g express-generator
+```
 
 ### 4. Create a ".gitignore" file and populate it with the following lines:
 ```
@@ -41,7 +45,7 @@ node_modules
 
 ## Creating the MYSQL database
 
-### 1. Move into "models" and install mysql:
+### 1. Move into `models/` and install mysql:
 ```
 sudo apt-get update
 sudo apt-get install mysql-server
@@ -50,19 +54,31 @@ sudo apt-get install mysql-server
 ### 2. Make a note of the root password you choose to use.
 
 ### 3. Check the mysql version with this command:
-`mysql --version`
-	* You should see output like this:
-`Ver 14.14 Distrib 5.7.27, for Linux (x86_64) using  EditLine wrapper`
-	* If your Distrib version number is less than 5.7.6, then you should initialize the data directory by running:
-`sudo mysql_install_db`
+```
+mysql --version
+```
+You should see output like this:
+```
+Ver 14.14 Distrib 5.7.27, for Linux (x86_64) using  EditLine wrapper
+```
+If your Distrib version number is less than 5.7.6, then you should initialize the data directory by running:
+```
+sudo mysql_install_db
+```
 
 ### 4. Check the mysql service status with this command:
-`service mysql status`
-	* If the output is `Unknown job: mysql`, then start the mysql service with this command:
-`sudo service mysql start`
+```
+service mysql status
+```
+If the output is `Unknown job: mysql`, then start the mysql service with this command:
+```
+sudo service mysql start
+```
 
 ### 5. Login into the mysql cli with this command:
-`mysql -u root -p`
+```
+mysql -u root -p
+```
 
 
 # Express Project Structure
