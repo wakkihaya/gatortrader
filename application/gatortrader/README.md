@@ -2,7 +2,7 @@
 
 ## Creating the GatorTrader Express Application
 
-### 1. Create "gatortrader" subdirectory in the "application" directory and move into "gatortrader".
+### 1. Create the `gatortrader/` root directory in the `application/` directory and move into `gatortrader/`.
 
 ### 2. Install express globally:
 ```
@@ -14,34 +14,39 @@ npm install -g express
 npm install -g express-generator
 ```
 
-### 4. Create a ".gitignore" file and populate it with the following lines:
+### 4. Create a `.gitignore` file and populate it with the following lines:
 ```
 node_modules
 .DS_Store
 ```
 
 ### 5. Create the following subdirectories:
-* controllers
-* helpers
-* middleware
-* tests
+```
+controllers/
+helpers/
+middlewares/
+models/
+tests/
+```
 
-### 6. The gatortrader subdirectory should now look like this:
-* .
-* ..
-* app.js
-* bin/
-* controllers/
-* .gitignore
-* helpers/
-* middlewares/
-* models/
-* package.josn
-* public/
-* README.md
-* routes/
-* tests/
-* views/
+### 6. The `gatortrader/` root directory should now look like this:
+```
+.
+..
+app.js
+bin/
+controllers/
+.gitignore
+helpers/
+middlewares/
+models/
+package.josn
+public/
+README.md
+routes/
+tests/
+views/
+```
 
 ## Creating the MYSQL database
 
@@ -50,27 +55,23 @@ node_modules
 sudo apt-get update
 sudo apt-get install mysql-server
 ```
+Make a note of the root password you choose to use.
 
-### 2. Make a note of the root password you choose to use.
-
-### 3. Check the mysql version with this command:
+### 2. Check the mysql version with this command:
 ```
 mysql --version
 ```
-You should see output like this:
-```
-Ver 14.14 Distrib 5.7.27, for Linux (x86_64) using  EditLine wrapper
-```
-If your Distrib version number is less than 5.7.6, then you should initialize the data directory by running:
+You should see output like this: `Ver 14.14 Distrib 5.7.27, for Linux (x86_64) using  EditLine wrapper`
+If your Distrib version number is less than 5.7.6, then you should initialize the data directory:
 ```
 sudo mysql_install_db
 ```
 
-### 4. Check the mysql service status with this command:
+### 3. Check the mysql service status:
 ```
 service mysql status
 ```
-If the output is `Unknown job: mysql`, then start the mysql service with this command:
+If the output is `Unknown job: mysql`, then start the mysql service:
 ```
 sudo service mysql start
 ```
