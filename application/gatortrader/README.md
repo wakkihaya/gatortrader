@@ -55,43 +55,43 @@ The structure contains the following files and subdirectories:
 
 ## Root Project Files
 
-### app.js
+### * app.js
 Initializes the GatorTrader express app and glues everything together.
 
-### package.json
+### * package.json
 Remembers all pakages that your app depends on and their versions.
 
-### .gitignore
+### * .gitignore
 Used to select which files git should ignore for tracking.
 
-### README.md
+### * README.md
 Information about this project, install instructions, etc.
 
 ## Root Project Subdirectories
 
-### bin/
+### * bin/
 Contains the executable file that starts the app.
 
-### controllers/
+### * controllers/
 Responsible for taking the inputs from the routes and invoking the appropriate actions to execute.
 
-### helpers/
+### * helpers/
 Code and functionality to be shared by different parts of the project.
 
-### middlewares/
+### * middlewares/
 Express middlewares that process the incoming requests before handling them down to the routes.
 
-### models
+### * models
 Represents data, implements business logic, and handles storage.
 
-### public/
+### * public/
 Contains all static files like images, styles, and javascript.
 
-### routes/
+### * routes/
 Responsible for initializing and associating route with controllers.
 
-### views/
+### * views/
 Provides templates which are rendered and served by your routes.
 
-### tests/
+### * tests/
 Tests everything which is in the other subdirectories.
