@@ -167,7 +167,7 @@ Code and functionality to be shared by different parts of the project.
 ### middlewares/
 Express middlewares that process the incoming requests before handling them down to the routes.
 
-### models
+### models/
 Represents data, implements business logic, and handles storage.
 
 ### public/
