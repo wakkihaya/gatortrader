@@ -22,6 +22,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+// Establish connection to the database from app.js file of application
+const mysql = require('mysql');
+const database = mysql.createConnection({
+	host: 'localhost',
+	user: 'root',
+	password: 'Fr0ntEndBackEnd',
+	database: 'gt_database'
+});
+database.connect(function(err) {
+	if (err) throw err;
+	console.log('Connected!');
+});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
