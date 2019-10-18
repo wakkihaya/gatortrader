@@ -50,14 +50,19 @@ views/
 
 ## Creating the MYSQL database
 
-### 1. Move into `models/` and install mysql:
+### 1. Install the mysql module from your root directory:
+```
+npm install mysql
+```
+
+### 2. Move into `models/` and install mysql-server:
 ```
 sudo apt-get update
 sudo apt-get install mysql-server
 ```
 Make a note of the root password you choose to use.
 
-### 2. Check the mysql version with this command:
+### 3. Check the mysql version with this command:
 ```
 mysql --version
 ```
@@ -67,7 +72,7 @@ If your Distrib version number is less than 5.7.6, then you should initialize th
 sudo mysql_install_db
 ```
 
-### 3. Check the mysql service status:
+### 4. Check the mysql service status:
 ```
 service mysql status
 ```
@@ -80,7 +85,54 @@ sudo service mysql start
 ```
 mysql -u root -p
 ```
+And enter the password you used during installation when prompted.
 
+### 6. Create database with a name of your choosing:
+```
+create database gt_database;
+```
+Verify that it was created:
+```
+show databases;
+```
+You should see it show up in the list.
+```
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| gt_database        |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+```
+You can exit the mysql cli with `\q`.
+
+### 7. Establish connection to the database from app.js file of the application by adding this block of text into your root app.js file.
+```
+// Establish connection to the database from app.js file of application
+const mysql = require('mysql');
+const database = mysql.createConnextion({
+        host: 'localhost',
+        user: 'root',
+        password: '<your_password>',
+        database: 'gt_database'
+});
+database.connect(function(err) {
+        if (err) throw err;
+        console.log('Connected!');
+});
+
+```
+Replace the password value with mysql root user password and gt_database with your database name.
+Now test your connection with `node app.js`. If at this point you get any kind of error that states that your application could not find a particular module, then your installation of express was likely incomplete. We ran into this error ourselves for the module `cookie-parser/`, so we corrected this with the following lines in the root directory:
+```
+npm install
+npm install --save cookie-parser
+```
+Running `app.js` should now result in the console log `Connected!`.
 
 # Express Project Structure
 
