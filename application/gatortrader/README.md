@@ -134,6 +134,13 @@ npm install --save cookie-parser
 ```
 Running `app.js` should now result in the console log `Connected!`.
 
+## Installing MySQL Workbench
+
+### 1. Install MySQL Workbench
+```
+sudo apt-get install mysql-workbench
+```
+
 # Express Project Structure
 
 This project root directory shall contain all code for the GatorTrader express project separated into subfolders.
