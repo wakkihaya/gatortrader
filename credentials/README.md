@@ -23,7 +23,14 @@
 ## <strong>Failure to do so will result it points be deducted from milestone submissions.</strong><br>
 ## You may store the most of the above in this README.md file. DO NOT Store the SSH key or any keys in this README.md file.
 
-Required Items (up to M0):
-1. ec2-54-183-26-186.us-west-1.compute.amazonaws.com
-2. ubuntu
-3. found in Team05KeyPair.pem
+# Required Items (up to M0):
+    1. http://54.67.101.141/
+    2. ubuntu
+    3. found in Team05KeyPair.pem 
+        Note: server.js is running in the background even when logged off and it must restarted with "node <relative filepath>server.js" if it is ever killed
+    4. - 7. Database setup not required in M0, per instructions.
+    8. 
+        Step 1: Download Team05KeyPair.pem and save it onto your terminal
+        Step 2: Take note of both the username and current working address (the address is changed every time the server is stopped/started)
+        Step 3: Start Git Bash, and ssh into the AWS server using the following command:
+            ssh -i <filepath to pem file on your terminal> ubuntu@<current working address>
