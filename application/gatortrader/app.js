@@ -89,7 +89,7 @@ app.get('/index',function (req,res) {
 				if(error) throw error;
 				else {
 					// send the data from db to index.ejs
-					res.render('index', {category_list: results_categories}, {item_list: results_items});
+					res.render('index', {category_list: results_categories, item_list: results_items});
 				}
 	 		});
 		}
