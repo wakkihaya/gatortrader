@@ -66,7 +66,8 @@ const database = mysql.createConnection({
 	host: 'localhost',
 	user: 'root',
 	password: 'Fr0ntEndBackEnd',
-	database: 'gt_database'
+	database: 'gt_database',
+	multipleStatements: true
 });
 
 //connect to database
@@ -77,14 +78,22 @@ database.connect(function(err) {
 
 
 app.get('/index',function (req,res) {
-	//get data from db
-	 database.query('select item_name from items',function (error,results,fields) {
+	//get data from db for category dropbox
+	var sql_categories = 'select category_name from categories';
+	database.query(sql_categories,function (error,results_categories,fields) {
 	 	if(error) throw error;
 	 	else {
-			//send the data from db to index.ejs
-			res.render('index', {item_list: results});
+			var sql_items = 'select * from items';
+			
+			database.query(sql_items, function (error, results_items, fields) {
+				if(error) throw error;
+				else {
+					// send the data from db to index.ejs
+					res.render('index', {category_list: results_categories}, {item_list: results_items});
+				}
+	 		});
 		}
-	 });
+	});
 });
 
 // catch 404 and forward to error handler
