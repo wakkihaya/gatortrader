@@ -75,6 +75,9 @@ database.connect(function(err) {
 	console.log('Connected!');
 });
 
+app.get('/index',function (req,res) {
+	res.render('index');
+});
 
 function search(req, res, next) {
 
@@ -82,23 +85,22 @@ function search(req, res, next) {
 
 	var category = req.query.category;
 
+	console.log("cate" +category);
+	console.log("search"+searchTerm);
+
 	let query = 'select * from items';
 	if (searchTerm != '' && category != '') {
-		query = 'select * from items where category_id = ' + category + ' and (item_name like %' + searchTerm + '% or description like %' + searchTerm + '%)';
+		query = "select * from items where category_id = " + category + " and (item_name like '%" + searchTerm + "%' or description like '%" + searchTerm + "%')";
 	}
 	else if (searchTerm != '' && category == '') {
-		query = 'select * from items where item_name like %' + searchTerm + '% or description like %' + searchTerm + '%';
+		query = "select * from items where item_name like '%" + searchTerm + "%' or description like '%" + searchTerm + "%'";
 	}
 	else if (searchTerm == '' && category != '') {
 		query = 'select * from items where category_id =  ' + category;
+	}else{ // default -> index.ejs
+		return res.render("index");
 	}
 	database.query(query, (err, result) => {
-		if (err) {
-			req.searchResult = '';
-			req.searchTerm = '';
-			req.category = '';
-			next();
-		}
 
 		req.searchResult = result;
 		req.searchTerm = searchTerm;
@@ -107,15 +109,16 @@ function search(req, res, next) {
 	});
 }
 
-app.get('/index', search, (req, res) => {
+app.get('/search', search, (req, res) => {
 
-  var searchResult = req.searchResult;
-  res.render('index', {
-    results: searchResult.length,
-    searchTerm: req.searchTerm,
-    searchResult: searchResult,
-    category: req.category
-  });
+	//searchResult is type of Json
+	var searchResult = req.searchResult;
+	res.render('search_result',{
+		results: searchResult.length,
+		searchTerm: req.searchTerm,
+		searchResult: searchResult,
+		category: req.category
+	});
 });
 
 // catch 404 and forward to error handler
