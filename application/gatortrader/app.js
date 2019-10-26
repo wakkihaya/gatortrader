@@ -101,7 +101,6 @@ function search(req, res, next) {
 		return res.render("index");
 	}
 	database.query(query, (err, result) => {
-
 		req.searchResult = result;
 		req.searchTerm = searchTerm;
 		req.category = category;
