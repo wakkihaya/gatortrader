@@ -106,14 +106,14 @@
         <!-- Search form -->
 
         <!--dropdown button for search-->
-        <form action="/search" method="get">
+        <form>
           <div class="input-group-prepend">
             <select name="category" class="custom-select" id="inputGroupSelect01">
-                <option value="" selected>Categories</option>
-                <option  value="<%=(typeof category != "undefined" ? category : 1)  %>" > Books</option>
-                <option  value="<%=(typeof category != "undefined" ? category : 2)%>" > Electronics</option>
-                <option  value="<%=(typeof category != "undefined" ? category : 3)%>" > Furniture</option>
-                <option  value="<%=(typeof category != "undefined" ? category : 4)%>" > Tutoring</option>
+                <option value="">Categories</option>
+                <option value="1" <% if (category == "1") { %> selected <% } %> >Books</option>
+                <option value="2" <% if (category == "2") { %> selected <% } %> >Electronics</option>
+                <option value="3" <% if (category == "3") { %> selected <% } %> >Furniture</option>
+                <option value="4" <% if (category == "4") { %> selected <% } %> >Tutoring</option>
             </select>
           </div>
 
@@ -137,13 +137,16 @@
     </div>
 </nav>
 
-<div class="container-fluid bg-7">
-    <div class="container">
-        <div id="result" class="panel-group">
 
+<!-- First Container -->
+
+    <div class="container-fluid bg-7">
+      <div class="container">
+        <div id="result" class="panel-group">
+               
         </div>
+      </div>
     </div>
-</div>
 
 
 <!-- Footer -->
@@ -154,7 +157,25 @@
 </body>
 
 <script>
+$(document).ready(function() {
+<% for (var i=0; i<results; i++) { %>
 
+document.getElementById('result').innerHTML += '<div class="panel panel-default">'
+document.getElementById('result').innerHTML += '<div class="panel-body">'
+document.getElementById('result').innerHTML += '<div class="media">'
+document.getElementById('result').innerHTML += '<div class="media-left media-middle">'
+document.getElementById('result').innerHTML += '<img src="/application/gatortrader/public/images/GTLogo.png" class="media-object" style="width: 18em" />'
+document.getElementById('result').innerHTML += '</div>'
+document.getElementById('result').innerHTML += '<div class="media-body text-center">'
+document.getElementById('result').innerHTML += '<h4 class="media-heading"><%= searchResult[i]['item_name'] %></h4>'
+document.getElementById('result').innerHTML += '<h4 class="media-heading">$<%= searchResult[i]['price'] %></h4>'
+document.getElementById('result').innerHTML += '<p><ipsum class=""><%= searchResult[i]['description'] %></ipsum></p>'
+document.getElementById('result').innerHTML += '</div>'
+document.getElementById('result').innerHTML += '</div>'
+document.getElementById('result').innerHTML += '</div>'
+document.getElementById('result').innerHTML += '</div>'
+<% } %>
+});
 </script>
 
 </html>
