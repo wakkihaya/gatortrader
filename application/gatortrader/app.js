@@ -67,7 +67,6 @@ const database = mysql.createConnection({
 	user: 'root',
 	password: 'Fr0ntEndBackEnd',
 	database: 'gt_database',
-	multipleStatements: true
 });
 
 //connect to database
@@ -77,23 +76,46 @@ database.connect(function(err) {
 });
 
 
-app.get('/index',function (req,res) {
-	//get data from db for category dropbox
-	var sql_categories = 'select category_name from categories';
-	database.query(sql_categories,function (error,results_categories,fields) {
-	 	if(error) throw error;
-	 	else {
-			var sql_items = 'select * from items';
-			
-			database.query(sql_items, function (error, results_items, fields) {
-				if(error) throw error;
-				else {
-					// send the data from db to index.ejs
-					res.render('index', {category_list: results_categories, item_list: results_items});
-				}
-	 		});
+function search(req, res, next) {
+
+	var searchTerm = req.query.search;
+
+	var category = req.query.category;
+
+	let query = 'select * from items';
+	if (searchTerm != '' && category != '') {
+		query = 'select * from items where category_id = ' + category + ' and (item_name like %' + searchTerm + '% or description like %' + searchTerm + '%)';
+	}
+	else if (searchTerm != '' && category == '') {
+		query = 'select * from items where item_name like %' + searchTerm + '% or description like %' + searchTerm + '%';
+	}
+	else if (searchTerm == '' && category != '') {
+		query = 'select * from items where category_id =  ' + category;
+	}
+	database.query(query, (err, result) => {
+		if (err) {
+			req.searchResult = '';
+			req.searchTerm = '';
+			req.category = '';
+			next();
 		}
+
+		req.searchResult = result;
+		req.searchTerm = searchTerm;
+		req.category = category;
+		next();
 	});
+}
+
+app.get('/index', search, (req, res) => {
+
+  var searchResult = req.searchResult;
+  res.render('index', {
+    results: searchResult.length,
+    searchTerm: req.searchTerm,
+    searchResult: searchResult,
+    category: req.category
+  });
 });
 
 // catch 404 and forward to error handler
