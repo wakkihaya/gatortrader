@@ -142,13 +142,26 @@
 
 <div class="container-fluid bg-7">
     <div class="container">
-        <div id="result" class="panel-group">
-            <% for(var i  =0; i<results; i++){ %>
-                <h4 class="media-heading"><%= searchResult[i]['item_name'] %></h4>
-                <h4 class="media-heading">$<%= searchResult[i]['price'] %></h4>
-                <p><%= searchResult[i]['description'] %> %></p>
-            <% }%>
-        </div>
+        <% for(var i  =0; i<results; i++){ %>
+            <div id="result" class="panel-group">
+                <div class="panel-body">
+                    <div class="media">
+                        <div class="media-left media-middle">
+                            <img
+                                        src="/images/GTLogo.png"
+                                        class="media-object"
+                                        style="width: 18em"
+                                />
+                        </div>
+                        <div class="media-body text-center">
+                            <h4 class="media-heading"><%= searchResult[i]['item_name'] %></h4>
+                            <h4 class="media-heading">$<%= searchResult[i]['price'] %></h4>
+                            <p><%= searchResult[i]['description'] %> %></p>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        <% }%>
     </div>
 </div>
 
