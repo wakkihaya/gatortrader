@@ -104,15 +104,15 @@
 
         <!--dropdown button for search-->
         <form action="/search" method="get">
-            <div class="input-group-prepend">
-                <select name="category" class="custom-select" id="inputGroupSelect01">
-                    <option value="" selected>Categories</option>
-                    <option  value="<%=(typeof category != "undefined" ? category : 1)  %>" > Books</option>
-                    <option  value="<%=(typeof category != "undefined" ? category : 2)%>" > Electronics</option>
-                    <option  value="<%=(typeof category != "undefined" ? category : 3)%>" > Furniture</option>
-                    <option  value="<%=(typeof category != "undefined" ? category : 4)%>" > Tutoring</option>
-                </select>
-            </div>
+          <div class="input-group-prepend">
+            <select name="category" class="custom-select" id="inputGroupSelect01">
+                <option value="" selected>Categories</option>
+                <option  value="<%=(typeof category != "undefined" ? category : 1)  %>" > Books</option>
+                <option  value="<%=(typeof category != "undefined" ? category : 2)%>" > Electronics</option>
+                <option  value="<%=(typeof category != "undefined" ? category : 3)%>" > Furniture</option>
+                <option  value="<%=(typeof category != "undefined" ? category : 4)%>" > Tutoring</option>
+            </select>
+          </div>
 
 
             <div class="input-group mb-3">
