@@ -82,7 +82,6 @@ app.get('/index',function (req,res) {
 function search(req, res, next) {
 
 	var searchTerm = req.query.search;
-
 	var category = req.query.category;
 
 	console.log("cate" +category);
@@ -124,6 +123,9 @@ app.get('/search', search, (req, res) => {
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+//to display the static files(images) to the .ejs
+app.use(express.static('public'));
 
 // error handler
 app.use(function(err, req, res, next) {
