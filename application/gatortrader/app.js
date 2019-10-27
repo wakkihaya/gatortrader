@@ -82,7 +82,6 @@ app.get('/index',function (req,res) {
 function search(req, res, next) {
 
 	var searchTerm = req.query.search;
-
 	var category = req.query.category;
 
 	console.log("cate" +category);
