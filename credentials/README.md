@@ -24,11 +24,14 @@
 ## You may store the most of the above in this README.md file. DO NOT Store the SSH key or any keys in this README.md file.
 
 # Required Items (up to M0):
-    1. http://54.67.101.141/
+    1. http://54.153.122.163/
     2. ubuntu
     3. found in Team05KeyPair.pem 
         Note: server.js is running in the background even when logged off and it must restarted with "node <relative filepath>server.js" if it is ever killed
-    4. - 7. Database setup not required in M0, per instructions.
+    4. Hosted directly on server
+    5. root
+    6. Fr0ntEndBackEnd
+    7. gt_database
     8. 
         Step 1: Download Team05KeyPair.pem and save it onto your terminal
         Step 2: Take note of both the username and current working address (the address is changed every time the server is stopped/started)
