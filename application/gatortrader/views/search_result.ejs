@@ -104,16 +104,15 @@
 
         <!--dropdown button for search-->
         <form action="/search" method="get">
-          <div class="input-group-prepend">
-            <select name="category" class="custom-select" id="inputGroupSelect01">
-                <option value="" selected>Categories</option>
-                <option  value="<%=(typeof category != "undefined" ? category : 1)  %>" > Books</option>
-                <option  value="<%=(typeof category != "undefined" ? category : 2)%>" > Electronics</option>
-                <option  value="<%=(typeof category != "undefined" ? category : 3)%>" > Furniture</option>
-                <option  value="<%=(typeof category != "undefined" ? category : 4)%>" > Tutoring</option>
-            </select>
-          </div>
-
+            <div class="input-group-prepend">
+                <select name="category" class="custom-select" id="inputGroupSelect01">
+                    <option value="">Categories</option>
+                    <option  value="1" <% if (category == "1") { %> selected <% } %> >Books</option>
+                    <option  value="2" <% if (category == "2") { %> selected <% } %> >Electronics</option>
+                    <option  value="3" <% if (category == "3") { %> selected <% } %> >Furniture</option>
+                    <option  value="4" <% if (category == "4") { %> selected <% } %> >Tutoring</option>
+                </select>
+            </div>
 
             <div class="input-group mb-3">
 
@@ -135,6 +134,7 @@
     </div>
 </nav>
 
+
 <!-- First Container -->
 
 <div class="container-fluid bg-7">
@@ -145,10 +145,10 @@
                     <div class="media">
                         <div class="media-left media-middle">
                             <img
-                                    src="/images/GTLogo.png"
-                                    class="media-object"
-                                    style="width: 18em"
-                            />
+                                        src="/images/GTLogo.png"
+                                        class="media-object"
+                                        style="width: 18em"
+                                />
                         </div>
                         <div class="media-body text-center">
                             <h4 class="media-heading"><%= searchResult[i]['item_name'] %></h4>
@@ -157,11 +157,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+             </div>
         <% }%>
     </div>
 </div>
-
 
 <!-- Footer -->
 <footer class="container-fluid bg-6 text-center">

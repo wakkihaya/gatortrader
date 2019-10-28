@@ -75,31 +75,34 @@ database.connect(function(err) {
 	console.log('Connected!');
 });
 
+app.get('/index',function (req,res) {
+	database.query('select * from items', (err, result) => {
+		if(err) console.log(err);
+		res.render('index',{searchResult:result,results:result.length});
+	});
+});
 
 function search(req, res, next) {
 
 	var searchTerm = req.query.search;
-
 	var category = req.query.category;
+
+	console.log("cate" +category);
+	console.log("search"+searchTerm);
 
 	let query = 'select * from items';
 	if (searchTerm != '' && category != '') {
-		query = 'select * from items where category_id = ' + category + ' and (item_name like %' + searchTerm + '% or description like %' + searchTerm + '%)';
+		query = "select * from items where category_id = " + category + " and (item_name like '%" + searchTerm + "%' or description like '%" + searchTerm + "%')";
 	}
 	else if (searchTerm != '' && category == '') {
-		query = 'select * from items where item_name like %' + searchTerm + '% or description like %' + searchTerm + '%';
+		query = "select * from items where item_name like '%" + searchTerm + "%' or description like '%" + searchTerm + "%'";
 	}
 	else if (searchTerm == '' && category != '') {
 		query = 'select * from items where category_id =  ' + category;
+	}else{ // no words -> redirect to /index
+		return res.redirect('/index');
 	}
 	database.query(query, (err, result) => {
-		if (err) {
-			req.searchResult = '';
-			req.searchTerm = '';
-			req.category = '';
-			next();
-		}
-
 		req.searchResult = result;
 		req.searchTerm = searchTerm;
 		req.category = category;
@@ -107,31 +110,35 @@ function search(req, res, next) {
 	});
 }
 
-app.get('/index', search, (req, res) => {
+app.get('/search', search, (req, res) => {
 
-  var searchResult = req.searchResult;
-  res.render('index', {
-    results: searchResult.length,
-    searchTerm: req.searchTerm,
-    searchResult: searchResult,
-    category: req.category
-  });
+	//searchResult is type of Json
+	var searchResult = req.searchResult;
+	res.render('search_result',{
+		results: searchResult.length,
+		searchTerm: req.searchTerm,
+		searchResult: searchResult,
+		category: req.category
+	});
 });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+	next(createError(404));
 });
+
+//to display the static files(images) to the .ejs
+app.use(express.static('public'));
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error',{error:err});
+	// render the error page
+	res.status(err.status || 500);
+	res.render('error',{error:err});
 });
 
 app.listen(3000);
