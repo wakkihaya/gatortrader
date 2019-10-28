@@ -50,8 +50,6 @@
             background-color: #fbca32; /* Gold */
             color: #000000;
         }
-
-
         .container-fluid {
             padding-top: 70px;
             padding-bottom: 70px;
@@ -74,7 +72,6 @@
             background-image: none;
             background-repeat: no-repeat;
         }
-
     </style>
 </head>
 
@@ -118,31 +115,50 @@
           </div>
 
 
-          <div class="input-group mb-3">
-            
-            <!--Actual search bar-->
-            <input id="search" class="form-control" type="text" name="search" value="<%= (typeof searchTerm != "undefined" ? searchTerm : "") %>" placeholder="Search...">
+            <div class="input-group mb-3">
 
-            <!--Searchbar search button-->
-            <div class="input-group-btn">
-              <button class="btn btn-default" type="submit" onclick="this.form.submit()">
-                <i class="glyphicon glyphicon-search"></i>
-              </button>
+                <!--Actual search bar-->
+                <input id="search" class="form-control" type="text" name="search" value="<%= (typeof searchTerm != "undefined" ? searchTerm : "") %>" placeholder="Search...">
+
+                <!--Searchbar search button-->
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit" onclick="this.form.submit()">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+
+
             </div>
-
-
-          </div>
 
         </form>
 
     </div>
 </nav>
 
+<!-- First Container -->
+
 <div class="container-fluid bg-7">
     <div class="container">
-        <div id="result" class="panel-group">
-
-        </div>
+        <% for(var i  =0; i<results; i++){ %>
+            <div id="result" class="panel-group">
+                <div class="panel-body">
+                    <div class="media">
+                        <div class="media-left media-middle">
+                            <img
+                                    src="/images/GTLogo.png"
+                                    class="media-object"
+                                    style="width: 18em"
+                            />
+                        </div>
+                        <div class="media-body text-center">
+                            <h4 class="media-heading"><%= searchResult[i]['item_name'] %></h4>
+                            <h4 class="media-heading">$<%= searchResult[i]['price'] %></h4>
+                            <p><%= searchResult[i]['description'] %> %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }%>
     </div>
 </div>
 
@@ -155,12 +171,6 @@
 </body>
 
 <script>
-
 </script>
 
 </html>
-
-
-
-
-

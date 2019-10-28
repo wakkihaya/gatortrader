@@ -76,7 +76,10 @@ database.connect(function(err) {
 });
 
 app.get('/index',function (req,res) {
-	res.render('index');
+	database.query('select * from items', (err, result) => {
+		if(err) console.log(err);
+		res.render('index',{searchResult:result,results:result.length});
+	});
 });
 
 function search(req, res, next) {
@@ -96,8 +99,8 @@ function search(req, res, next) {
 	}
 	else if (searchTerm == '' && category != '') {
 		query = 'select * from items where category_id =  ' + category;
-	}else{ // default -> index.ejs
-		return res.render("index");
+	}else{ // no words -> redirect to /index
+		return res.redirect('/index');
 	}
 	database.query(query, (err, result) => {
 		req.searchResult = result;
@@ -121,7 +124,7 @@ app.get('/search', search, (req, res) => {
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+	next(createError(404));
 });
 
 //to display the static files(images) to the .ejs
@@ -129,13 +132,13 @@ app.use(express.static('public'));
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error',{error:err});
+	// render the error page
+	res.status(err.status || 500);
+	res.render('error',{error:err});
 });
 
 app.listen(3000);
