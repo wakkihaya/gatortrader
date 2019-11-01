@@ -75,15 +75,6 @@
         .panel-default {
             border-color: #320033;
         }
-        a {
-            text-decoration: none;
-            }
-
-         a:hover 
-            {
-                text-decoration:none; 
-                cursor:pointer;  
-            }
     </style>
 </head>
 
@@ -106,7 +97,8 @@
 
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/new">SELL</a></li>
+                <!-- <li><a href="/index">HOME</a></li> -->
+                <li><a href="/new.html">SELL</a></li>
                 <li><a href="/aboutUs">ABOUT US</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> ACCOUNT</a></li>
             </ul>
@@ -116,21 +108,21 @@
 
         <!--dropdown button for search-->
         <form action="/search" method="get">
-          <div class="input-group-prepend">
-            <select name="category" class="custom-select" id="inputGroupSelect01">
-                <option value="" selected>Categories</option>
-                <option  value="<%=(typeof category != "undefined" ? category : 1)  %>" > Books</option>
-                <option  value="<%=(typeof category != "undefined" ? category : 2)%>" > Electronics</option>
-                <option  value="<%=(typeof category != "undefined" ? category : 3)%>" > Furniture</option>
-                <option  value="<%=(typeof category != "undefined" ? category : 4)%>" > Tutoring</option>
-            </select>
-          </div>
+            <div class="input-group-prepend">
+              <select name="category" class="custom-select" id="inputGroupSelect01">
+                  <option value="" selected>Categories</option>
+                  <option  value="<%=(typeof category != "undefined" ? category : 1)  %>" > Books</option>
+                  <option  value="<%=(typeof category != "undefined" ? category : 2)%>" > Electronics</option>
+                  <option  value="<%=(typeof category != "undefined" ? category : 3)%>" > Furniture</option>
+                  <option  value="<%=(typeof category != "undefined" ? category : 4)%>" > Tutoring</option>
+              </select>
+            </div>
 
 
             <div class="input-group mb-3">
 
                 <!--Actual search bar-->
-                <input id="search" class="form-control" type="text" name="search" value="<%= (typeof searchTerm != "undefined" ? searchTerm : "") %>" placeholder="Search...">
+                <input id="search" class="form-control" type="text" name="search" value="" placeholder="Search...">
 
                 <!--Searchbar search button-->
                 <div class="input-group-btn">
@@ -151,34 +143,42 @@
 
 <div class="container-fluid bg-7">
     <div class="container">
-        <% for(var i  =0; i<results; i++){ %>
-            <a href="/item_listing">
             <div class="panel panel-default">
-                <div id="result" class="panel-group">
-                    <div class="panel-body">
-                        <div class="media">
-                            <div class="media-left media-middle">
-                                <img
-                                        src="/images/GTLogo.png"
-                                        class="media-object"
-                                        style="width: 18em"
-                                />
-                            </div>
-                            <div class="media-body text-center">
-                                <h4 class="media-heading"><%= searchResult[i]['item_name'] %></h4>
-                                <h4 class="media-heading">$<%= searchResult[i]['price'] %></h4>
-                                <p><%= searchResult[i]['description'] %> %></p>
-                            </div>
-                        </div>
+                <div class="panel-group">
+                        <div class="panel-body">
+                                <div class="media">
+
+            <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">ITEM NAME</label>
+                      <input type="NAME" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ENTER ITEM NAME">
                     </div>
+                    <div class="form-group">
+                            <label for="exampleInputEmail1">ITEM CATEGORY</label>
+                            <input type="NAME" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ENTER ITEM CATEGORY">
+                          </div>
+                          <div class="form-group">
+                                <label for="exampleInputEmail1">ITEM COST</label>
+                                <input type="NAME" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ENTER ITEM COST">
+                              </div>
+                              <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">ITEM DESCRIPTION</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="WRITE ITEM DESCRIPTION" rows="3"></textarea>
+                                  </div>
+                                  <div class="form-group">
+                                        <label for="exampleInputEmail1">ITEM IMAGE DROP</label>
+                                        <input type="FILE" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                      </div>
+                   
+                    <button type="submit" class="btn btn-primary">POST</button>
+                  </form>
+                  </div>
+                </div>
                 </div>
             </div>
-        </a>
-        <% }%>
+    </div>
     </div>
 </div>
-
-
 <!-- Footer -->
 <footer class="container-fluid bg-6 text-center">
     <p><a href="index">Back to Top</a></p>

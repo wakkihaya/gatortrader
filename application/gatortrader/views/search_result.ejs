@@ -72,6 +72,18 @@
             background-image: none;
             background-repeat: no-repeat;
         }
+        .panel-default {
+            border-color: #320033;
+        }
+        a {
+            text-decoration: none;
+            }
+
+         a:hover 
+            {
+                text-decoration:none; 
+                cursor:pointer;  
+            }
     </style>
 </head>
 
@@ -140,6 +152,8 @@
 <div class="container-fluid bg-7">
     <div class="container">
         <% for(var i  =0; i<results; i++){ %>
+                <a href="/item_listing">
+                        <div class="panel panel-default">
             <div id="result" class="panel-group">
                 <div class="panel-body">
                     <div class="media">
@@ -158,6 +172,8 @@
                     </div>
                 </div>
              </div>
+            </div>
+                </a>
         <% }%>
     </div>
 </div>

@@ -75,6 +75,7 @@
         .panel-default {
             border-color: #320033;
         }
+
         a {
             text-decoration: none;
             }
@@ -152,7 +153,6 @@
 <div class="container-fluid bg-7">
     <div class="container">
         <% for(var i  =0; i<results; i++){ %>
-            <a href="/item_listing">
             <div class="panel panel-default">
                 <div id="result" class="panel-group">
                     <div class="panel-body">
@@ -169,11 +169,17 @@
                                 <h4 class="media-heading">$<%= searchResult[i]['price'] %></h4>
                                 <p><%= searchResult[i]['description'] %> %></p>
                             </div>
+                            <div class="media body text-center">
+                                <img
+                                    src="/images/sfsu_map.jpg"
+                                    class="media-object"
+                                    style="width: 18em"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </a>
         <% }%>
     </div>
 </div>
