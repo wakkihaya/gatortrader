@@ -145,7 +145,11 @@
                     <div class="media">
                         <div class="media-left media-middle">
                             <img
-                                        src="/images/GTLogo.png"
+                                        <% if(searchResult[i]['image'] != null) { %>
+                                            src="<%= searchResult[i]['image']%>"
+                                        <% }else{ %>
+                                            src ="/images/GTLogo.png"
+                                        <% } %>
                                         class="media-object"
                                         style="width: 18em"
                                 />
