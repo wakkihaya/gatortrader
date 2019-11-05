@@ -162,6 +162,7 @@
 <div class="container-fluid bg-7">
     <div class="container">
         <% for(var i  =0; i<results; i++){ %>
+
                 <form action="/item_listing/<%= i %>" method="get" name="item_list">
                     <!-- <button> -->
 
@@ -174,7 +175,11 @@
                         <div class="media">
                             <div class="media-left media-middle">
                                 <img
-                                        src="/images/GTLogo.png"
+                                    <% if(searchResult[i]['image'] != null) { %>
+                                        src="<%= searchResult[i]['image']%>"
+                                    <% }else{ %>
+                                        src ="/images/GTLogo.png"
+                                    <% } %>
                                         class="media-object"
                                         style="width: 18em"
                                 />
@@ -184,6 +189,7 @@
                                 <h4 class="media-heading">$<%= searchResult[i]['price'] %></h4>
                                 <p><%= searchResult[i]['description'] %> %></p>
                             </div>
+
                         </div>
                     </div>
                 </div>
