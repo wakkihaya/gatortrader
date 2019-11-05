@@ -75,6 +75,7 @@
         .panel-default {
             border-color: #320033;
         }
+
         a {
             text-decoration: none;
             }
@@ -106,7 +107,7 @@
 
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/index">HOME</a></li>
+                <li><a href="/new">SELL</a></li>
                 <li><a href="/aboutUs">ABOUT US</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> ACCOUNT</a></li>
             </ul>
@@ -116,15 +117,16 @@
 
         <!--dropdown button for search-->
         <form action="/search" method="get">
-            <div class="input-group-prepend">
-                <select name="category" class="custom-select" id="inputGroupSelect01">
-                    <option value="">Categories</option>
-                    <option  value="1" <% if (category == "1") { %> selected <% } %> >Books</option>
-                    <option  value="2" <% if (category == "2") { %> selected <% } %> >Electronics</option>
-                    <option  value="3" <% if (category == "3") { %> selected <% } %> >Furniture</option>
-                    <option  value="4" <% if (category == "4") { %> selected <% } %> >Tutoring</option>
-                </select>
-            </div>
+          <div class="input-group-prepend">
+            <select name="category" class="custom-select" id="inputGroupSelect01">
+                <option value="" selected>Categories</option>
+                <option  value="<%=(typeof category != "undefined" ? category : 1)  %>" > Books</option>
+                <option  value="<%=(typeof category != "undefined" ? category : 2)%>" > Electronics</option>
+                <option  value="<%=(typeof category != "undefined" ? category : 3)%>" > Furniture</option>
+                <option  value="<%=(typeof category != "undefined" ? category : 4)%>" > Tutoring</option>
+            </select>
+          </div>
+
 
             <div class="input-group mb-3">
 
@@ -146,41 +148,42 @@
     </div>
 </nav>
 
-
 <!-- First Container -->
 
 <div class="container-fluid bg-7">
     <div class="container">
-        <% for(var i  =0; i<results; i++){ %>
-                <a href="/item_listing">
-                        <div class="panel panel-default">
-            <div id="result" class="panel-group">
-                <div class="panel-body">
-                    <div class="media">
-                        <div class="media-left media-middle">
-                            <img
-                                        <% if(searchResult[i]['image'] != null) { %>
-                                            src="<%= searchResult[i]['image']%>"
-                                        <% }else{ %>
-                                            src ="/images/GTLogo.png"
-                                        <% } %>
+       <% for(var i  =0; i<results; i++){ %>
+            <div class="panel panel-default">
+                <div id="result" class="panel-group">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="media-left media-middle">
+                                <img
+                                        src="/images/GTLogo.png"
                                         class="media-object"
                                         style="width: 18em"
                                 />
-                        </div>
-                        <div class="media-body text-center">
-                            <h4 class="media-heading"><%= searchResult[i]['item_name'] %></h4>
-                            <h4 class="media-heading">$<%= searchResult[i]['price'] %></h4>
-                            <p><%= searchResult[i]['description'] %> %></p>
+                            </div>
+                            <div class="media-body text-center">
+                                <h4 class="media-heading"><%= searchResult[i]['item_name'] %></h4>
+                                <h4 class="media-heading">$<%= searchResult[i]['price'] %></h4>
+                                <p><%= searchResult[i]['description'] %> %></p>
+                            </div>
+                            <div class="media body text-center">
+                                <img
+                                    src="/images/sfsu_map.jpg"
+                                    class="media-object"
+                                    style="width: 18em"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
-             </div>
             </div>
-                </a>
         <% }%>
     </div>
 </div>
+
 
 <!-- Footer -->
 <footer class="container-fluid bg-6 text-center">

@@ -1,4 +1,3 @@
--- MySQL dump 10.13  Distrib 5.7.27, for Linux (x86_64)
 --
 -- Host: localhost    Database: gt_database
 -- ------------------------------------------------------
@@ -15,6 +14,8 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+CREATE DATABASE gt_database;
+USE gt_database;
 --
 -- Table structure for table `categories`
 --

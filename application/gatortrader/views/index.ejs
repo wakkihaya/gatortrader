@@ -72,6 +72,28 @@
             background-image: none;
             background-repeat: no-repeat;
         }
+        .panel-default {
+            border-color: #320033;
+        }
+        a {
+            text-decoration: none;
+            }
+
+         a:hover 
+            {
+                text-decoration:none; 
+                cursor:pointer;  
+            }
+
+            button {
+                background: none;
+                color: inherit;
+                border: none;
+                padding: 0;
+                font: inherit;
+                cursor: pointer;
+                outline: inherit;
+            }
     </style>
 </head>
 
@@ -94,7 +116,7 @@
 
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/index">HOME</a></li>
+                <li><a href="/new">SELL</a></li>
                 <li><a href="/aboutUs">ABOUT US</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> ACCOUNT</a></li>
             </ul>
@@ -140,28 +162,47 @@
 <div class="container-fluid bg-7">
     <div class="container">
         <% for(var i  =0; i<results; i++){ %>
-            <div id="result" class="panel-group">
-                <div class="panel-body">
-                    <div class="media">
-                        <div class="media-left media-middle">
-                            <img
+
+                <form action="/item_listing/<%= i %>" method="get" name="item_list">
+                    <!-- <button> -->
+
+
+            <div class="panel panel-default">
+                    <!-- <a href="javascript:item_list.submit()" class="list_item_atag"> -->
+                        <button>
+                <div id="result" class="panel-group">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="media-left media-middle">
+                                <img
                                     <% if(searchResult[i]['image'] != null) { %>
                                         src="<%= searchResult[i]['image']%>"
                                     <% }else{ %>
                                         src ="/images/GTLogo.png"
                                     <% } %>
-                                    class="media-object"
-                                    style="width: 18em"
-                            />
-                        </div>
-                        <div class="media-body text-center">
-                            <h4 class="media-heading"><%= searchResult[i]['item_name'] %></h4>
-                            <h4 class="media-heading">$<%= searchResult[i]['price'] %></h4>
-                            <p><%= searchResult[i]['description'] %> %></p>
+                                        class="media-object"
+                                        style="width: 18em"
+                                />
+                            </div>
+                            <div class="media-body text-center">
+                                <h4 class="media-heading"><%= searchResult[i]['item_name'] %></h4>
+                                <h4 class="media-heading">$<%= searchResult[i]['price'] %></h4>
+                                <p><%= searchResult[i]['description'] %> %></p>
+                            </div>
+
                         </div>
                     </div>
                 </div>
-            </div>
+            <!-- </a> -->
+        </button>
+
+        </div>
+            
+            <!-- <button onclick="location.href = '/item_listing/1'">More...</button> -->
+                <!-- <button>More...</button> -->
+            </form>
+            <!-- <button onclick="location.href = '/item_listing/1'">More...</button> -->
+       
         <% }%>
     </div>
 </div>
