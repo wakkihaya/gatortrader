@@ -128,6 +128,26 @@ app.get("/search", search, (req, res) => {
   });
 });
 
+app.get("/new", (req, res) => {
+  res.render("new");
+});
+
+// view a single item listing
+app.get("/item_listing/:id", (req, res) => {
+  var item_id = parseInt(req.params.id) + 1;
+  console.log("item" + item_id);
+  database.query(
+    "select * from items where item_id =" + item_id,
+    (err, result) => {
+      if (err) console.log(err);
+      res.render("item_listing", {
+        searchResult: result,
+        results: result.length
+      });
+    }
+  );
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
