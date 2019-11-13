@@ -125,7 +125,7 @@
         <!-- Search form -->
 
         <!--dropdown button for search-->
-        <form action="/search" method="get">
+        <form action="/search" method="get" onsubmit="return formValidation()">
           <div class="input-group-prepend">
             <select name="category" class="custom-select" id="inputGroupSelect01">
                 <option value="" selected>Categories</option>
@@ -140,7 +140,7 @@
             <div class="input-group mb-3">
 
                 <!--Actual search bar-->
-                <input id="search" class="form-control" type="text" name="search" value="<%= (typeof searchTerm != "undefined" ? searchTerm : "") %>" placeholder="Search...">
+                <input id="search" class="form-control" type="text" name="search" value="<%= (typeof searchTerm != "undefined" ? searchTerm : "") %>" placeholder="Search..." maxlength="40">
 
                 <!--Searchbar search button-->
                 <div class="input-group-btn">
@@ -216,6 +216,26 @@
 </body>
 
 <script>
+    //the trigger of this function is when submitting.
+    function formValidation(){
+        var searchform = document.getElementById('search');
+        if(textAlphanumeric(searchform, 'error')){
+            return true;
+        }
+        return false;
+    }
+
+    //function to validate
+    function textAlphanumeric(inputtext, alertMsg) {
+        var alphaExp = /^[0-9a-zA-Z]+$/;
+        if (inputtext.value.match(alphaExp)) {
+            return true;
+        } else {
+            document.getElementById('p5').innerText = alertMsg; // This segment displays the validation rule for address.
+            inputtext.focus();
+            return false;
+        }
+    }
 </script>
 
 </html>
