@@ -85,6 +85,9 @@
                 text-decoration:none; 
                 cursor:pointer;  
             }
+
+
+
     </style>
 </head>
 
@@ -172,12 +175,14 @@
                                 <h4 class="media-heading"><%= searchResult[i]['item_name'] %></h4>
                                 <h4 class="media-heading">$<%= searchResult[i]['price'] %></h4>
                                 <p><%= searchResult[i]['description'] %> %></p>
+                                <button>Contact Seller</button>
                             </div>
                             <div class="media body text-center">
                                 <img
+                                    class="center"
                                     src="/images/sfsu_map.jpg"
                                     class="media-object"
-                                    style="width: 18em"
+                                    style="width: 90%"
                                 />
                             </div>
                         </div>
