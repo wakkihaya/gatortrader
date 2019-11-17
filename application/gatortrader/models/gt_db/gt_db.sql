@@ -1,4 +1,3 @@
--- MySQL dump 10.13  Distrib 5.7.27, for Linux (x86_64)
 --
 -- Host: localhost    Database: gt_database
 -- ------------------------------------------------------
@@ -15,6 +14,8 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+CREATE DATABASE gt_database;
+USE gt_database;
 --
 -- Table structure for table `categories`
 --
@@ -72,7 +73,7 @@ DROP TABLE IF EXISTS `items`;
 CREATE TABLE `items` (
   `item_name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `image` blob,
+  `image` varchar(255),
   `category_id` varchar(50) DEFAULT NULL,
   `price` decimal(10,2) unsigned NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -89,7 +90,7 @@ CREATE TABLE `items` (
 
 LOCK TABLES `items` WRITE;
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
-INSERT INTO `items` VALUES ('CS Textbook','Just a computer science textbook!',NULL,'1',138.00,'2019-10-25 04:03:16',1,1,1),('Portable USB','64GB storage!',NULL,'2',32.00,'2019-10-25 04:03:44',1,1,2),('CSC 0600 Tutoring','Very knowledgable on every topic discussed in CSC 0600! Each offer is good for 10 total hours of tutoring!',NULL,'4',50.00,'2019-10-25 04:04:30',1,2,3),('Ergonomic Desk Chair','Don\'t let bad posture be an extra problem!',NULL,'3',46.00,'2019-10-25 04:04:16',1,3,4),('Wireless Mouse','Go wireless, today!',NULL,'2',25.00,'2019-10-25 04:04:00',1,3,5);
+INSERT INTO `items` VALUES ('CS Textbook','Just a computer science textbook!','https://upload.wikimedia.org/wikipedia/commons/6/63/Textbook.JPG','1',138.00,'2019-10-25 04:03:16',1,1,1),('Portable USB','64GB storage!',NULL,'2',32.00,'2019-10-25 04:03:44',1,1,2),('CSC 0600 Tutoring','Very knowledgable on every topic discussed in CSC 0600! Each offer is good for 10 total hours of tutoring!',NULL,'4',50.00,'2019-10-25 04:04:30',1,2,3),('Ergonomic Desk Chair','Don\'t let bad posture be an extra problem!',NULL,'3',46.00,'2019-10-25 04:04:16',1,3,4),('Wireless Mouse','Go wireless, today!',NULL,'2',25.00,'2019-10-25 04:04:00',1,3,5);
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 UNLOCK TABLES;
 
