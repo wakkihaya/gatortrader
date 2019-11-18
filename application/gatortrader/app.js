@@ -155,6 +155,14 @@ app.get("/new", (req, res) => {
   res.render("new");
 });
 
+app.get("/signIn", (req, res) => {
+  res.render("signIn");
+});
+
+app.get("/registration", (req, res) => {
+  res.render("registration");
+});
+
 //put the input values on sell page to database
 app.post("/new",uploadDir.single('itemImage'),(req, res) =>{
   var itemName = req.body.itemName;
