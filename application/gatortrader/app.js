@@ -4,6 +4,9 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var ejs = require("ejs");
+const multer = require('multer');
+
+
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -17,6 +20,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+const upDir = path.join(__dirname,"public/upload");
+const uploadDir = multer({dest: upDir});
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -66,12 +72,26 @@ const database = mysql.createConnection({
   database: "gt_database"
 });
 
+//for validation
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({
+  limit: '50mb',
+  extended: true
+}));
+app.use(bodyParser.json({
+  limit: '50mb'
+}));
+
+
+const { check, validationResult } = require('express-validator');
+
 //connect to database
 database.connect(function(err) {
   if (err) console.log(err);
   console.log("Connected!");
 });
 
+//for default page with all items.
 app.get("/index", function(req, res) {
   database.query("select * from items", (err, result) => {
     if (err) console.log(err);
@@ -79,6 +99,7 @@ app.get("/index", function(req, res) {
   });
 });
 
+//search function
 function search(req, res, next) {
   var searchTerm = req.query.search;
   var category = req.query.category;
@@ -117,6 +138,7 @@ function search(req, res, next) {
   });
 }
 
+//display the result of search by using search function
 app.get("/search", search, (req, res) => {
   //searchResult is type of Json
   var searchResult = req.searchResult;
@@ -128,8 +150,26 @@ app.get("/search", search, (req, res) => {
   });
 });
 
+//for sell page
 app.get("/new", (req, res) => {
   res.render("new");
+});
+
+//put the input values on sell page to database
+app.post("/new",uploadDir.single('itemImage'),(req, res) =>{
+  var itemName = req.body.itemName;
+  var itemCategory = req.body.category;
+  var itemCost = req.body.itemCost;
+  var itemDescription = req.body.itemDescription;
+  var itemImage = req.body.itemImage;
+
+  //Actually,pull user ID from Login information.
+  var userID =5;
+
+  var query = 'INSERT INTO items (item_name, description, image, category_id, price, user_id) values ("'+ itemName+'",'+ '"'+itemDescription+'",'+ '"'+itemImage+'",'+ '"'+itemCategory+'",'+ '"'+itemCost+'",'+ '"'+userID+'")';
+  database.query(query, function(err,rows){
+    res.redirect('/index');
+  });
 });
 
 // view a single item listing
@@ -140,6 +180,8 @@ app.get("/item_listing/:id", (req, res) => {
     "select * from items where item_id =" + item_id,
     (err, result) => {
       if (err) console.log(err);
+      console.log("sr: "+ result );
+      console.log("r: "+result.length );
       res.render("item_listing", {
         searchResult: result,
         results: result.length
