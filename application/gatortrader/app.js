@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-const upDir = path.join(__dirname,"public/upload");
+const upDir = path.join(__dirname,"public/.upload");
 const uploadDir = multer({dest: upDir});
 
 // view engine setup
@@ -163,11 +163,20 @@ app.get("/registration", (req, res) => {
   res.render("registration");
 });
 
+//for files
+// var storage = multer.diskStorage({
+//   destination: function(req, file, callback){
+//     callback(null, 'public/.upload')
+//   }
+// })
+
+//写真をフォルダに保存はできた。それをdatabase に保存するときに、変数名のせいで保存が出来ていない。
+
 //put the input values on sell page to database
 app.post("/new",uploadDir.single('itemImage'),
     [
       check('itemName').isLength({min: 1,max: 40}).withMessage("The length of item name is up to 40"),
-      check('itemName').isAlphanumeric().withMessage("Use only numbers and Letters"),
+      check('itemName').matches(/^[a-z0-9 ]+$/i).withMessage("Use only numbers and Letters"),
       check('itemCost').isNumeric().withMessage("Use only numbers"),
       check('itemDescription').isLength({max:200}).withMessage("The length of item description is up to 200")
     ],
@@ -176,10 +185,16 @@ app.post("/new",uploadDir.single('itemImage'),
   var itemCategory = req.body.category;
   var itemCost = req.body.itemCost;
   var itemDescription = req.body.itemDescription;
-  var itemImage = req.body.itemImage;
 
   //Actually,pull user ID from Login information.
   var userID =5;
+
+  console.log("file"+ req.files);
+
+  //about image
+      var file = req.file;
+      var itemImage = file.filename;
+
 
   //for validation
   const errors = validationResult(req);

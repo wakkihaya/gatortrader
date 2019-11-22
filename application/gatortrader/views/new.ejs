@@ -149,7 +149,7 @@
                                         <p style="color: #f00"><%= message.param %> : <%= message.msg %></p>
                                     <% } %>
 
-            <form action = "/new" method = "post">
+            <form action = "/new" method = "post" enctype="multipart/form-data">
                     <div class="form-group">
                       <label for="exampleInputEmail1">ITEM NAME</label>
                       <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ENTER ITEM NAME" name = "itemName" required>
@@ -174,7 +174,7 @@
                                   </div>
                                   <div class="form-group">
                                         <label for="exampleInputEmail1">ITEM IMAGE DROP</label>
-                                        <input type="FILE" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="itemImage">
+                                        <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="itemImage">
                                       </div>
                    
                     <button type="submit" class="btn btn-primary">POST</button>
