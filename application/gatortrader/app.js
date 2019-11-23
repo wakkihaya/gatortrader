@@ -152,7 +152,7 @@ app.get("/search", search, (req, res) => {
 
 //for sell page
 app.get("/new", (req, res) => {
-  res.render("new");
+  res.render("new",{ messages:''});
 });
 
 app.get("/signIn", (req, res) => {
@@ -164,7 +164,14 @@ app.get("/registration", (req, res) => {
 });
 
 //put the input values on sell page to database
-app.post("/new",uploadDir.single('itemImage'),(req, res) =>{
+app.post("/new",uploadDir.single('itemImage'),
+    [
+      check('itemName').isLength({min: 1,max: 40}).withMessage("The length of item name is up to 40"),
+      check('itemName').isAlphanumeric().withMessage("Use only numbers and Letters"),
+      check('itemCost').isNumeric().withMessage("Use only numbers"),
+      check('itemDescription').isLength({max:200}).withMessage("The length of item description is up to 200")
+    ],
+    (req, res) =>{
   var itemName = req.body.itemName;
   var itemCategory = req.body.category;
   var itemCost = req.body.itemCost;
@@ -174,11 +181,18 @@ app.post("/new",uploadDir.single('itemImage'),(req, res) =>{
   //Actually,pull user ID from Login information.
   var userID =5;
 
-  var query = 'INSERT INTO items (item_name, description, image, category_id, price, user_id) values ("'+ itemName+'",'+ '"'+itemDescription+'",'+ '"'+itemImage+'",'+ '"'+itemCategory+'",'+ '"'+itemCost+'",'+ '"'+userID+'")';
-  database.query(query, function(err,rows){
-    res.redirect('/index');
-  });
+  //for validation
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+      res.render("new",{messages: errors.array()});
+  }else {
+    var query = 'INSERT INTO items (item_name, description, image, category_id, price, user_id) values ("' + itemName + '",' + '"' + itemDescription + '",' + '"' + itemImage + '",' + '"' + itemCategory + '",' + '"' + itemCost + '",' + '"' + userID + '")';
+    database.query(query, function (err, rows) {
+      res.redirect('/index');
+    });
+  }
 });
+
 
 // view a single item listing
 app.get("/item_listing/:id", (req, res) => {
