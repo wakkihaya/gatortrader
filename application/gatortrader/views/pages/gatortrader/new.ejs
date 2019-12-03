@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../../partials/head.ejs %>
+    <title> Gator Trader | New Item </title>
+</head>
+<body>
+
+<header>
+    <%- include('../../partials/header.ejs', {categories : categories}); %>
+</header>
+
+<main>
+    <!-- First Container -->
+    <div class="container-fluid bg-7">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-group">
+                    <div class="panel-body">
+                        <div class="media">
+                            <form action="/new" method="post" enctype="multipart/form-data">
+
+                                <!-- ITEM NAME -->
+                                <div class="form-group">
+                                    <label for="inputItemName"> ITEM NAME </label>
+                                    <input type="text" class="form-control" id="inputItemName" name="itemName" placeholder="ENTER ITEM NAME" aria-describedby="helpItemName" required>
+                                </div>
+
+                                <!-- ITEM CATEGORY -->
+                                <div class="form-group">
+                                    <label for="inputItemCategory"> ITEM CATEGORY </label>
+                                    <select class="custom-select" id="inputItemCategory" name="itemCategory" aria-describedby="helpItemCategory" required>
+                                        <option value="" selected>Categories</option>
+                                        <% categories.forEach(function (category) { %>
+                                        <option value="<%=(typeof category != "undefined" ? category["category_id"] : '')%>"><%= category["category_name"] %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+
+                                <!-- ITEM COST -->
+                                <div class="form-group">
+                                    <label for="inputItemCost"> ITEM COST </label>
+                                    <input type="text" class="form-control" id="inputItemCost" name="itemCost" placeholder="ENTER ITEM COST" aria-describedby="helpItemCost" required>
+                                </div>
+
+                                <!-- ITEM DESCRIPTION -->
+                                <div class="form-group">
+                                    <label for="inputItemDescription"> ITEM DESCRIPTION </label>
+                                    <textarea class="form-control" id="inputItemDescription" name="itemDescription" placeholder="ENTER ITEM DESCRIPTION" rows="3" aria-describedby="helpItemDescription" required></textarea>
+                                </div>
+
+                                <!-- ITEM IMAGE -->
+                                <div class="form-group">
+                                    <label for="inputItemImage"> ITEM IMAGE DROP </label>
+                                    <input type="file" class="form-control" id="inputItemImage" name="itemImage" aria-describedby="helpItemImage">
+                                </div>
+
+                                <!-- SUBMIT FORM BUTTON -->
+                                <button type="submit" class="btn btn-primary"> POST MY ITEM </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<!-- Footer -->
+<footer>
+    <% include ../../partials/footer.ejs %>
+</footer>
+
+</body>
+</html>
