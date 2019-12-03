@@ -6,8 +6,6 @@ var category_controller = require('../controllers/categoryController');
 var item_controller = require('../controllers/itemController');
 var gatortrader_controller = require('../controllers/gatortraderController');
 
-/* INDEX GLOBAL MIDDLEWARE */
-
 /* Logger middleware function */
 router.use(function (req, res, next) {
   console.log('/ middleware (Logger)');
