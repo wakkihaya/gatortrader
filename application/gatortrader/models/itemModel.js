@@ -3,7 +3,7 @@
 var sql = require('./gt_db.js');
 
 // item object constructor
-var Item = function (item) {
+var ItemModel = function (item) {
     this.item_id = item.item_id;
     this.user_id = item.user_id;
     this.category_id = item.category_id;
@@ -14,7 +14,7 @@ var Item = function (item) {
     this.date_created = item.date_created;
     this.in_stock = item.in_stock;
 };
-Item.getAllItems = function (result) {
+ItemModel.getAllItems = function (result) {
     console.log('itemModel');
     sql.query('SELECT * FROM items ORDER BY date_created DESC', function (err, res) {
         if (err) {
@@ -27,7 +27,7 @@ Item.getAllItems = function (result) {
         }
     });
 };
-Item.getItemByItemId = function (itemId, result) {
+ItemModel.getItemByItemId = function (itemId, result) {
     console.log('itemModel');
     sql.query('SELECT * FROM items WHERE item_id=?', itemId, function (err, res) {
         if (err) {
@@ -40,7 +40,7 @@ Item.getItemByItemId = function (itemId, result) {
         }
     });
 };
-Item.getItemsByCategoryId = function (categoryId, result) {
+ItemModel.getItemsByCategoryId = function (categoryId, result) {
     console.log('itemModel');
     sql.query('SELECT * FROM items WHERE category_id=? ORDER BY date_created DESC', categoryId, function (err, res)  {
         if (err) {
@@ -53,7 +53,7 @@ Item.getItemsByCategoryId = function (categoryId, result) {
         }
     });
 };
-Item.getItemsByUserId = function (userId, result) {
+ItemModel.getItemsByUserId = function (userId, result) {
     console.log('itemModel');
     sql.query('SELECT * FROM items WHERE user_id=?', userId, function (err, res)  {
         if (err) {
@@ -67,7 +67,7 @@ Item.getItemsByUserId = function (userId, result) {
     });
 };
 
-Item.getItemsBySearchTerm = function (searchTerm, result) {
+ItemModel.getItemsBySearchTerm = function (searchTerm, result) {
     console.log('itemModel');
     var query = "SELECT * FROM items WHERE item_name LIKE '%" +
         searchTerm +
@@ -86,7 +86,7 @@ Item.getItemsBySearchTerm = function (searchTerm, result) {
     });
 };
 
-Item.getItemsByCategoryIdSearchTerm = function (categoryId, searchTerm, result) {
+ItemModel.getItemsByCategoryIdSearchTerm = function (categoryId, searchTerm, result) {
     console.log('itemModel');
     var query = "SELECT * FROM items WHERE category_id = " +
         categoryId +
@@ -107,4 +107,4 @@ Item.getItemsByCategoryIdSearchTerm = function (categoryId, searchTerm, result) 
     });
 };
 
-module.exports = Item;
+module.exports = ItemModel;
