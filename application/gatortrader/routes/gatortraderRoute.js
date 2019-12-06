@@ -6,6 +6,12 @@ var category_controller = require('../controllers/categoryController');
 var item_controller = require('../controllers/itemController');
 var gatortrader_controller = require('../controllers/gatortraderController');
 
+var path = require("path");
+const multer = require('multer');
+
+const uploadDir = multer({dest: '../public/.upload/'});
+
+
 /* Logger middleware function */
 router.use(function (req, res, next) {
   console.log('/ middleware (Logger)');
@@ -53,8 +59,15 @@ router.get('/item_listing/:item_id',
 /* GATORTRADER POST ROUTES */
 
 /* POST new item */
-router.post('/new'
-
+router.post('/new',
+    uploadDir.single('itemImage'),
+    // [
+    //   check('itemName').isLength({min: 1,max: 40}).withMessage("The length of item name is up to 40"),
+    //   check('itemName').matches(/^[a-z0-9 ]+$/i).withMessage("Use only numbers and Letters"),
+    //   check('itemCost').isNumeric().withMessage("Use only numbers"),
+    //   check('itemDescription').isLength({max:200}).withMessage("The length of item description is up to 200")
+    // ],
+    item_controller.newItems
 );
 
 module.exports = router;

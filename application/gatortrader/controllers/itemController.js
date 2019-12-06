@@ -158,3 +158,39 @@ exports.check_if_no_results = function (req, res, next) {
     }
 
 };
+
+exports.newItems = function (req,res,next) {
+    var itemName = req.body.itemName;
+    var itemCategory = req.body.itemCategory;
+    var itemCost = req.body.itemCost;
+    var itemDescription = req.body.itemDescription;
+
+    console.log("itemcate"+ itemCategory);
+    //Actually,pull user ID from Login information.
+    var userID =5;
+
+    console.log("file"+ req.files);
+
+    //about image
+    var file = req.file;
+    var itemImage = file.filename;
+    
+    ItemModel.insertNewItems(itemName,itemCategory,itemCost,itemDescription,userID,itemImage,function (err) {
+        if (err) {
+            res.send(err);
+        }
+        res.redirect('index');
+    });
+
+
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //     res.render("new",{messages: errors.array()});
+    // }else {
+    //     var query = 'INSERT INTO items (item_name, description, image, category_id, price, user_id) values ("' + itemName + '",' + '"' + itemDescription + '",' + '"' + itemImage + '",' + '"' + itemCategory + '",' + '"' + itemCost + '",' + '"' + userID + '")';
+    //     database.query(query, function (err, rows) {
+    //         res.redirect('/index');
+    //     });
+   // }
+
+};
