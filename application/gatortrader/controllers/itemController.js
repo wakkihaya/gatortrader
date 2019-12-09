@@ -159,6 +159,28 @@ exports.check_if_no_results = function (req, res, next) {
 
 };
 
+
+
+
+
+const { check, validationResult } = require('express-validator');
+
+exports.validate = (value) =>{
+    console.log("hey");
+    console.log(value);
+    switch (value) {
+        case 'createItem': {
+            return [
+                check('itemName').isLength({min: 1,max: 40}).withMessage("The length of item name is up to 40"),
+                check('itemName').matches(/^[a-z0-9 ]+$/i).withMessage("Use only numbers and Letters"),
+                check('itemCost').isNumeric().withMessage("Use only numbers"),
+                check('itemDescription').isLength({max:200}).withMessage("The length of item description is up to 200")
+            ];
+        }
+    }
+};
+
+
 exports.newItems = function (req,res,next) {
     var itemName = req.body.itemName;
     var itemCategory = req.body.itemCategory;
@@ -174,7 +196,12 @@ exports.newItems = function (req,res,next) {
     //about image
     var file = req.file;
     var itemImage = file.filename;
-    
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.render("new",{messages: errors.array()});
+    }
+
     ItemModel.insertNewItems(itemName,itemCategory,itemCost,itemDescription,userID,itemImage,function (err) {
         if (err) {
             res.send(err);
@@ -183,14 +210,6 @@ exports.newItems = function (req,res,next) {
     });
 
 
-    // const errors = validationResult(req);
-    // if (!errors.isEmpty()) {
-    //     res.render("new",{messages: errors.array()});
-    // }else {
-    //     var query = 'INSERT INTO items (item_name, description, image, category_id, price, user_id) values ("' + itemName + '",' + '"' + itemDescription + '",' + '"' + itemImage + '",' + '"' + itemCategory + '",' + '"' + itemCost + '",' + '"' + userID + '")';
-    //     database.query(query, function (err, rows) {
-    //         res.redirect('/index');
-    //     });
-   // }
 
 };
+
