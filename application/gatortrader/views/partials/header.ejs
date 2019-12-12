@@ -1,0 +1,79 @@
+<!-- views/partials/header.ejs -->
+<style>
+.header-bar {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+.custom-select {
+    height: 35px;
+    outline: none;
+    padding: 0 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+.header-bar .input-group{
+  width:100%;
+}
+
+form{
+    display: inline-flex;
+    width: 100%;
+}
+
+</style>
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+    <div class="container">
+        <!-- Home logo button -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Gator Trader</a>
+        </div>
+
+        <!-- Collapsible menu -->
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/new">SELL</a></li>
+                <li><a href="/about">ABOUT US</a></li>
+                <li><a href="/signIn"><span class="glyphicon glyphicon-user"></span>ACCOUNT</a></li>
+            </ul>
+        </div>
+
+        <!-- Search form -->
+        <div class="header-bar">
+
+        <form action="/search" method="get" onsubmit="return formValidation()">
+
+            <!--dropdown button for search-->
+            <div class="input-group-prepend">
+                <select name="category" class="custom-select" id="inputGroupSelect01">
+                    <option value="">Categories</option>
+                    <% categories.forEach(function (category) { %>
+                    <option value="<%=(typeof category != "undefined" ? category["category_id"] : "")%>"><%= category["category_name"] %></option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <!--Actual search bar-->
+                <input id="search" class="form-control" type="text" name="search" value="<%= (typeof searchTerm != "undefined" ? searchTerm : "") %>" placeholder="Search..." maxlength="40">
+
+                <!--Searchbar search button-->
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit" onclick="this.form.submit()">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+        </div>
+    </div>
+</nav>

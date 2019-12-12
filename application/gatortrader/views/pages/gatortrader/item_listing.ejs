@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../../partials/head.ejs %>
+    <title> Gator Trader | <%= item[0]['item_name'] %> </title>
+</head>
+<body>
+
+<header>
+    <%- include('../../partials/header.ejs', {categories : categories, searchTerm : searchTerm}); %>
+</header>
+
+<main>
+    <!-- First Container -->
+    <div class="container-fluid bg-7">
+        <div class="container">
+            <% item.forEach(function(listing) { %>
+                <div class="panel panel-default">
+                    <div id="result" class="panel-group">
+                        <div class="panel-body">
+                            <div class="media">
+                                <div class="media-left media-middle">
+                                    <img
+                                    <% if((listing['image'] != null) && (listing['image'] != "")) { %>
+                                        src="/.upload/<%= listing['image']%>"
+                                    <% }else{ %>
+                                        src ="/images/GTLogo.png"
+                                            <% } %>
+                                        class="media-object"
+                                        style="width: 18em"
+                                    />
+                                </div>
+                                <div class="media-body text-center">
+                                    <h4 class="media-heading"> <%= listing['item_name'] %> </h4>
+                                    <h4 class="media-heading"> <%= categories[listing['category_id']-1]['category_name'] %> </h4>
+                                    <h4 class="media-heading"> $<%= listing['price'] %> </h4>
+                                    <p> <%= listing['description'] %> </p>
+                                    <button> CONTACT SELLER </button>
+                                </div>
+                                <div class="media body text-center">
+                                    <img
+
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer>
+    <% include ../../partials/footer.ejs %>
+</footer>
+
+</body>
+</html>
