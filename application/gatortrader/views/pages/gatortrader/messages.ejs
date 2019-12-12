@@ -203,7 +203,7 @@
     />
 
     <% include ../../partials/head.ejs %>
-    <title>Gator Trader | <%= item[0]['item_name'] %></title>
+    <title>Gator Trader | </title>
   </head>
   <body>
     <header>
@@ -345,7 +345,14 @@
 
             <div class="mesgs">
               <div class="msg_history">
-                <div class="incoming_msg">
+
+<!--                Use 'if' and order by created_date -->
+<!--                ここれへんの時系列を変える-->
+            <% for(var i = 0; i < senderMessages.length; i++){ %>
+                  <% for(var j = 0; j< recepientMessages.length; j++){ %>
+
+                <% if(senderMessages[i]['message_date'] > recepientMessages[j]['message_date']){ %>
+                  <div class="incoming_msg">
                   <div class="incoming_msg_img">
                     <img
                       src="https://ptetutorials.com/images/user-profile.png"
@@ -355,57 +362,27 @@
                   <div class="received_msg">
                     <div class="received_withd_msg">
                       <p>
-                        <%= messages[0]['message_text'] %>
-<!--                        Incoming message, Incoming message, Incoming message,-->
-<!--                        Incoming message, Incoming message, Incoming message,-->
+                        <%= senderMessages[i]['message_text'] %>
                       </p>
                       <span class="time_date"> 11:01 AM | June 9</span>
                     </div>
                   </div>
+
                 </div>
+                      <% } %>
+                      <% if(senderMessages[i]['message_date'] < recepientMessages[j]['message_date']){ %>
                 <div class="outgoing_msg">
                   <div class="sent_msg">
-                    <p>Outgoing message. This is an outgoing message.</p>
+                    <p>
+                      <%= recepientMessages[j]['message_text'] %>
+                    </p>
                     <span class="time_date"> 11:01 AM | June 9</span>
                   </div>
                 </div>
-                <div class="incoming_msg">
-                  <div class="incoming_msg_img">
-                    <img
-                      src="https://ptetutorials.com/images/user-profile.png"
-                      alt="sunil"
-                    />
-                  </div>
-                  <div class="received_msg">
-                    <div class="received_withd_msg">
-                      <p>Incoming message Test 123 123</p>
-                      <span class="time_date"> 11:01 AM | Yesterday</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="outgoing_msg">
-                  <div class="sent_msg">
-                    <p>Outgoing message testing 123 123 testing</p>
-                    <span class="time_date"> 11:01 AM | Today</span>
-                  </div>
-                </div>
-                <div class="incoming_msg">
-                  <div class="incoming_msg_img">
-                    <img
-                      src="https://ptetutorials.com/images/user-profile.png"
-                      alt="sunil"
-                    />
-                  </div>
-                  <div class="received_msg">
-                    <div class="received_withd_msg">
-                      <p>
-                        Final incoming message to mimic a real conversation.
-                      </p>
-                      <span class="time_date"> 11:01 AM | Today</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
+                    <%  }} %>
+           <% } %>
+
               <div class="type_msg">
                 <div class="input_msg_write">
                   <input

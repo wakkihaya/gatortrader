@@ -10,7 +10,7 @@ var message_controller = require("../controllers/messagesController");
 
 /* GET messages page */
 router.get(
-    "/messages/:item_id",
+    "/messages/:user_id",
     message_controller.get_messages,
     category_controller.list_all_categories,
     item_controller.find_item_by_item_id,

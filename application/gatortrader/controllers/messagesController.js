@@ -27,9 +27,19 @@ exports.get_messages = function (req,res,next) {
              res.send(err);
          }
          else {
-             res.locals.messages = messages;
+             res.locals.senderMessages = messages;
          }
          next();
      });
+
+    MessageModel.getYourRecepientMessages(user_id,function (err, messages) {
+        if (err) {
+            res.send(err);
+        }
+        else {
+            res.locals.recepientMessages = messages;
+        }
+        next();
+    });
 
 };

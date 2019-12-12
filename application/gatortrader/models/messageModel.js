@@ -38,4 +38,18 @@ MessageModel.getYourSenderMessages = function (user_id,result) {
     });
 };
 
+MessageModel.getYourRecepientMessages = function (user_id,result) {
+
+    sql.query('SELECT * FROM messages WHERE recepient_id =' + user_id, function(err,res){
+        if (err) {
+            console.log('error: ', err);
+            result(err, null);
+        }
+        else {
+            console.log("res"+ res);
+            result(null, res);
+        }
+    });
+};
+
 module.exports = MessageModel;
