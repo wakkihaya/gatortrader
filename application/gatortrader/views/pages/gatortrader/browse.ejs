@@ -14,7 +14,7 @@
     <!-- First Container -->
     <div class="container-fluid bg-7">
         <div class="container">
-
+            <!-- display items from search -->
             <% for (var i = 0; i < items.length; i++) { %>
                 <form action="/item_listing/<%= items[i]['item_id'] %>" method="get" name="item_list">
                     <div class="panel panel-default">
@@ -23,7 +23,11 @@
                                 <div class="media">
                                     <div class="media-left media-middle">
                                         <img
-                                                src=""
+                                        <% if((items[i]['image'] != null) && (items[i]['image'] != "")) { %>
+                                            src="/.upload/<%= items[i]['image'] %>"
+                                        <% }else{ %>
+                                            src="/images/GTLogo.png"
+                                                <% } %>
                                                 class="media-object"
                                                 style="width: 18em"
                                         />
