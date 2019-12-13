@@ -31,8 +31,9 @@
                                     <label for="inputItemCategory"> ITEM CATEGORY </label>
                                     <select class="custom-select" id="inputItemCategory" name="itemCategory" aria-describedby="helpItemCategory" required>
                                         <option value="" selected>Categories</option>
-                                        <% categories.forEach(function (category) { %>
-                                        <option value="<%=(typeof category != "undefined" ? category["category_id"] : '')%>"><%= category["category_name"] %></option>
+                                        <% categories.forEach(function (category_item) { %>
+                                        <% console.log("cate_name"+ category_item["category_id"]);%>
+                                        <option value="<%=(typeof itemCategory != "undefined" ? itemCategory : category_item["category_id"] )%>"><%= category_item["category_name"] %></option>
                                         <% }) %>
                                     </select>
                                 </div>

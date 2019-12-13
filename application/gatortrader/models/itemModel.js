@@ -107,4 +107,20 @@ ItemModel.getItemsByCategoryIdSearchTerm = function (categoryId, searchTerm, res
     });
 };
 
+ItemModel.insertNewItems = function(itemName,itemCategory,itemCost,itemDescription,userID,itemImage,result){
+    console.log("item"+ itemName);
+    var query = 'INSERT INTO items (item_name, description, image, category_id, price, user_id) values ("' +
+        itemName + '",' + '"' + itemDescription + '",' + '"' + itemImage + '",' + '"' +
+        itemCategory + '",' + '"' + itemCost + '",' + '"' + userID + '")';
+    sql.query(query, function (err, res) {
+        if (err) {
+            console.log('error: ', err);
+            result(err, null);
+        }
+        else {
+            result(null, res);
+        }
+    });
+};
+
 module.exports = ItemModel;
