@@ -1,19 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <% include ../../partials/head.ejs %>
-    <title> Gator Trader | Browsing </title>
-</head>
-<body>
+    <title>Gator Trader | Browsing</title>
+  </head>
+  <body>
+    <header>
+      <%- include('../../partials/header.ejs', {categories : categories,
+      searchTerm : searchTerm}); %>
+    </header>
 
-<header>
-    <%- include('../../partials/header.ejs', {categories : categories, searchTerm : searchTerm}); %>
-</header>
-
-<main>
-    <!-- First Container -->
-    <div class="container-fluid bg-7">
+    <main>
+      <!-- First Container -->
+      <div class="container-fluid bg-7">
         <div class="container">
+          <div class="dropdown clearfix">
+            <button
+              class="btn btn-primary dropdown-toggle pull-right"
+              type="button"
+              data-toggle="dropdown"
+              style="background-color: #320033;"
+            >
+              Filter Results <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li><a href="#"> price (HIGH / LOW) </a></li>
+              <li><a href="#"> price (LOW / HIGH) </a></li>
+            </ul>
+          </div>
+
+          <% for (var i = 0; i < items.length; i++) { %>
+          <form
+            action="/item_listing/<%= items[i]['item_id'] %>"
+            method="get"
+            name="item_list"
+          >
+            <div class="panel panel-default">
+              <button>
+                <div id="result" class="panel-group">
+                  <div class="media">
+                    <div class="media-left media-middle">
+                      <img src="" class="media-object" style="width: 18em" />
             <!-- display items from search -->
             <% for (var i = 0; i < items.length; i++) { %>
                 <form action="/item_listing/<%= items[i]['item_id'] %>" method="get" name="item_list">
@@ -42,18 +69,31 @@
                             </div>
                         </button>
                     </div>
-                </form>
-            <% } %>
-
+                    <div class="media-body text-center">
+                      <h4 class="media-heading">
+                        <%= items[i]['item_name'] %>
+                      </h4>
+                      <h4 class="media-heading">
+                        <%=
+                        categories[items[i]['category_id']-1]['category_name']
+                        %>
+                      </h4>
+                      <h4 class="media-heading">$<%= items[i]['price'] %></h4>
+                      <p><%= items[i]['description'] %></p>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </form>
+          <% } %>
         </div>
-    </div>
-</main>
+      </div>
+    </main>
 
-
-<!-- Footer -->
-<footer>
-    <% include ../../partials/footer.ejs %>
-</footer>
-
-</body>
+    <!-- Footer -->
+    <footer>
+      <% include ../../partials/footer.ejs %>
+    </footer>
+  </body>
 </html>
