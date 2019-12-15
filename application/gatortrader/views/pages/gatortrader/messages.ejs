@@ -370,6 +370,13 @@
               <div class="msg_history">
             <% for (var i = 0; i <messageArray.length ; i++) { %>
 
+               <% var hour = messageArray[i][0].getHours();  %>
+               <%   var minute = messageArray[i][0].getMinutes();%>
+               <% var date = messageArray[i][0].getDate();%>
+                  <% var month = messageArray[i][0].getMonth();%>
+
+                  <% var string = hour + ':' + minute + ' | ' + month + '/' + date ;%>
+
                 <% if(messageArray[i][2]){ %>
                   <div class="incoming_msg">
                   <div class="incoming_msg_img">
@@ -383,7 +390,7 @@
                       <p>
                         <%= messageArray[i][1] %>
                       </p>
-                      <span class="time_date"> 11:01 AM | June 9</span>
+                      <span class="time_date"> <%= string %></span>
                     </div>
                   </div>
                 </div>
@@ -393,7 +400,7 @@
                     <p>
                       <%= messageArray[i][1] %>
                     </p>
-                    <span class="time_date"> 11:01 AM | June 9</span>
+                    <span class="time_date">  <%= string%></span>
                   </div>
                 </div>
 
