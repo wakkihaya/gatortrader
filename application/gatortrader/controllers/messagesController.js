@@ -7,7 +7,7 @@ exports.get_messages = function (req,res,next) {
     const login_user_id = '0';
     var user_id = '0'; // In the real case, this user_id will be gotten from userModel,userController
 
-    MessageModel.getYourSenderMessages(user_id,function (err, messages) {
+    MessageModel.getYourSenderMessages(req.params.item_id,req.params.room_id,function (err, messages) {
          if (err) {
              res.send(err);
          }
@@ -17,7 +17,7 @@ exports.get_messages = function (req,res,next) {
          next();
      });
 
-    MessageModel.getYourRecepientMessages(user_id,function (err, messages) {
+    MessageModel.getYourRecepientMessages(req.params.item_id,req.params.room_id,function (err, messages) {
         if (err) {
             res.send(err);
         }
@@ -27,4 +27,30 @@ exports.get_messages = function (req,res,next) {
         next();
     });
 
+};
+
+exports.post_messages = function (req,res,next) {
+
+    var msg_text = req.body.message_text;
+
+    var sender_id =0;
+    // MessageModel.getSenderId(req.params.room_id, function (err,id) {
+    //     if (err) {
+    //         res.send(err);
+    //     }
+    //     else {
+    //         sender_id = id;
+    //     }
+    //     next();
+    // });
+
+    MessageModel.postMessage(req.params.item_id, req.params.room_id, sender_id ,msg_text,function (err, messages) {
+        if (err) {
+            res.send(err);
+        }
+        else {
+            res.redirect("/messages/"+req.params.item_id + '/' + req.params.room_id);
+        }
+        next();
+    });
 };

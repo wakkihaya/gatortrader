@@ -71,12 +71,19 @@ router.get(
 
 /* GET messages page */
 router.get(
-    "/messages/:item_id",
+    "/messages/:item_id/:room_id",
     message_controller.get_messages,
     category_controller.list_all_categories,
     item_controller.find_item_by_item_id,
     gatortrader_controller.render_messages
 );
+
+ // SEND messages
+router.post(
+    "/messages/:item_id/:room_id",
+    message_controller.post_messages
+);
+
 
 
 /* GET your_listings page */
@@ -97,5 +104,6 @@ router.post(
   //item_controller.validate('createItem'),
   item_controller.newItems
 );
+
 
 module.exports = router;
