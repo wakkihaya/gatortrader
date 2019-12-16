@@ -30,19 +30,8 @@ exports.get_messages = function (req,res,next) {
 };
 
 exports.post_messages = function (req,res,next) {
-
     var msg_text = req.body.message_text;
-
     var sender_id =0;
-    // MessageModel.getSenderId(req.params.room_id, function (err,id) {
-    //     if (err) {
-    //         res.send(err);
-    //     }
-    //     else {
-    //         sender_id = id;
-    //     }
-    //     next();
-    // });
 
     MessageModel.postMessage(req.params.item_id, req.params.room_id, sender_id ,msg_text,function (err, messages) {
         if (err) {
@@ -50,6 +39,21 @@ exports.post_messages = function (req,res,next) {
         }
         else {
             res.redirect("/messages/"+req.params.item_id + '/' + req.params.room_id);
+        }
+        next();
+    });
+};
+
+exports.get_messageslist = function (req,res,next) {
+    MessageModel.get_info_room_id(req.params.item_id,function (err,msglist) {
+        if (err) {
+            console.log("error here?");
+            res.send(err);
+        }
+        else {
+            console.log("msg");
+            console.log(msglist);
+            res.locals.msglist = msglist;
         }
         next();
     });

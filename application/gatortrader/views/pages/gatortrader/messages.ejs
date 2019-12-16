@@ -214,8 +214,11 @@
     <div class="container-fluid bg-7">
       <div class="container">
         <h3 class=" text-center">Messages</h3>
+
         <div class="messaging">
           <div class="inbox_msg">
+
+
             <div class="inbox_people">
               <div class="headind_srch">
                 <div class="recent_heading">
@@ -237,6 +240,10 @@
                 </div>
               </div>
               <div class="inbox_chat">
+                <% for (var i = 0; i <msglist.length ; i++) { %>
+                 <% var Month = msglist[i]['message_date'].getMonth(); %>
+                 <% var Date =  msglist[i]['message_date'].getDate();%>
+                 <% var time_string = Month + ' / ' + Date;%>
                 <div class="chat_list active_chat">
                   <div class="chat_people">
                     <div class="chat_img">
@@ -246,102 +253,19 @@
                       />
                     </div>
                     <div class="chat_ib">
-                      <h5>John Smith 1 <span class="chat_date">Dec 7</span></h5>
+                      <h5>John Smith 1 <span class="chat_date"><%= time_string%></span></h5>
                       <p>
-                        Incoming message, Incoming message, Incoming message,
-                        Incoming message, Incoming message, Incoming message,
+                        <%=msglist[i]['message_text']%>
                       </p>
                     </div>
                   </div>
                 </div>
-                <div class="chat_list">
-                  <div class="chat_people">
-                    <div class="chat_img">
-                      <img
-                        src="https://ptetutorials.com/images/user-profile.png"
-                        alt="sunil"
-                      />
-                    </div>
-                    <div class="chat_ib">
-                      <h5>Jane Doe 1 <span class="chat_date">Dec 3</span></h5>
-                      <p>
-                        Yes the item is still available. Where do you want to
-                        meet?
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="chat_list">
-                  <div class="chat_people">
-                    <div class="chat_img">
-                      <img
-                        src="https://ptetutorials.com/images/user-profile.png"
-                        alt="sunil"
-                      />
-                    </div>
-                    <div class="chat_ib">
-                      <h5>Jane Doe 2 <span class="chat_date">Dec 1</span></h5>
-                      <p>
-                        Hello I am interested in the item you have for sale.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="chat_list">
-                  <div class="chat_people">
-                    <div class="chat_img">
-                      <img
-                        src="https://ptetutorials.com/images/user-profile.png"
-                        alt="sunil"
-                      />
-                    </div>
-                    <div class="chat_ib">
-                      <h5>
-                        John Smith 2 <span class="chat_date">Nov 27</span>
-                      </h5>
-                      <p>
-                        HELLO GIVE ME THIS ITEM NOW
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="chat_list">
-                  <div class="chat_people">
-                    <div class="chat_img">
-                      <img
-                        src="https://ptetutorials.com/images/user-profile.png"
-                        alt="sunil"
-                      />
-                    </div>
-                    <div class="chat_ib">
-                      <h5>Jane Doe 3 <span class="chat_date">Nov 22</span></h5>
-                      <p>
-                        Would you accept $25 for that sweet table?
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="chat_list">
-                  <div class="chat_people">
-                    <div class="chat_img">
-                      <img
-                        src="https://ptetutorials.com/images/user-profile.png"
-                        alt="sunil"
-                      />
-                    </div>
-                    <div class="chat_ib">
-                      <h5>
-                        John Smith 3 <span class="chat_date">Nov 15</span>
-                      </h5>
-                      <p>
-                        Hi are you able to pick up the item today from my dorm?
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <% } %>
               </div>
             </div>
 
+
+<!--            push したらそのメッセージに移動するようにする-->
 <!--            one main message-->
 
 

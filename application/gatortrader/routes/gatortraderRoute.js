@@ -73,6 +73,7 @@ router.get(
 router.get(
     "/messages/:item_id/:room_id",
     message_controller.get_messages,
+    message_controller.get_messageslist,
     category_controller.list_all_categories,
     item_controller.find_item_by_item_id,
     gatortrader_controller.render_messages
