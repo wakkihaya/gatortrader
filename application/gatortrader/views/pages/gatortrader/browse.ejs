@@ -14,8 +14,23 @@
         <!-- First Container -->
         <div class="container-fluid bg-7">
             <div class="container">
+                <div class="dropdown clearfix">
+                    <button
+                            class="btn btn-primary dropdown-toggle pull-right"
+                            type="button"
+                            data-toggle="dropdown"
+                            style="background-color: #320033;"
+                    >
+                        Filter Results <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#"> price (HIGH / LOW) </a></li>
+                        <li><a href="#"> price (LOW / HIGH) </a></li>
+                    </ul>
+                </div>
 
-                <% for (var i = 0; i < items.length; i++) { %>
+
+            <% for (var i = 0; i < items.length; i++) { %>
                     <form action="/item_listing/<%= items[i]['item_id'] %>" method="get" name="item_list">
                         <div class="panel panel-default">
                             <button>
