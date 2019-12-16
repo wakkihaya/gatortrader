@@ -81,7 +81,7 @@ MessageModel.postMessage = function(user_id,room_id,sender_id,msg_text, result){
 //where で制限し取得したroom_id の一番新しいもののみを取得する。
 
 MessageModel.get_info_sender_room_id = function(user_id,result){
-  sql.query("SELECT * from messages where message_date in (select max(message_date) FROM messages WHERE sender_id = " + user_id +  " group by room_id)",function (err,res) {
+  sql.query("SELECT * from messages where sender_id = " + user_id +  " AND message_date in (select max(message_date) FROM messages WHERE sender_id = " + user_id +  " OR recepient_id = " + user_id + " group by room_id) ORDER BY message_date DESC",function (err,res) {
       if (err) {
           console.log('error: ', err);
           result(err, null);
@@ -94,7 +94,7 @@ MessageModel.get_info_sender_room_id = function(user_id,result){
 };
 
 MessageModel.get_info_recepient_room_id = function(user_id,result){
-    sql.query("SELECT * from messages where message_date in (select max(message_date) FROM messages WHERE recepient_id = " + user_id + " group by room_id)",function (err,res) {
+    sql.query("SELECT * from messages where recepient_id = " + user_id + " AND message_date in (select max(message_date) FROM messages WHERE recepient_id = " + user_id + " OR sender_id = " + user_id + " group by room_id) ORDER BY message_date DESC",function (err,res) {
         if (err) {
             console.log('error: ', err);
             result(err, null);
@@ -107,5 +107,3 @@ MessageModel.get_info_recepient_room_id = function(user_id,result){
 };
 
 module.exports = MessageModel;
-
-// ばらばらにするとroom/id がかぶる
