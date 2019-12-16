@@ -22,11 +22,13 @@
                                 <div id="result" class="panel-group">
                                     <div class="media">
                                         <div class="media-left media-middle">
-                                            <img
-                                                    src=""
+                                            <img <% if((items[i]['image'] != null) && (items[i]['image'] != "")) { %>
+                                                    src="/.upload/<%=items[i]['image']%>"
+                                            <% }else{ %>
+                                                    src="/images/GTLogo.png"
+                                                    <% } %>
                                                     class="media-object"
-                                                    style="width: 18em"
-                                            />
+                                                    style="width: 18em" />
                                         </div>
                                         <div class="media-body text-center">
                                             <h4 class="media-heading"> <%= items[i]['item_name'] %> </h4>
