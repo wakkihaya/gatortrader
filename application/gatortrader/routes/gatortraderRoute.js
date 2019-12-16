@@ -106,5 +106,22 @@ router.post(
   item_controller.newItems
 );
 
+router.get(
+    "/:user_id",
+    category_controller.list_all_categories,
+    item_controller.list_all_items,
+    gatortrader_controller.render_login_index
+);
+
+router.get(
+    "/:user_id/item_listing/:item_id",
+    category_controller.list_all_categories,
+    item_controller.find_item_by_item_id,
+    gatortrader_controller.render_login_item_listing
+);
+
+
+
+
 
 module.exports = router;
