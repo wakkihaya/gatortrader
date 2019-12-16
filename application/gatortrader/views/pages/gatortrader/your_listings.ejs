@@ -202,7 +202,7 @@
   </head>
   <body>
     <header>
-      <%- include('../../partials/header.ejs', {categories : categories,
+      <%- include('../../partials/headerLoggedIn.ejs', {categories : categories,
       searchTerm : searchTerm}); %>
     </header>
     <div class="container-fluid bg-7">
@@ -343,45 +343,59 @@
             <div class="mesgs">
               <div class="msg_history">
                 <!-- First Container -->
-                <div class="container-fluid bg-7">
-                  <div class="container">
-                    <% item.forEach(function(listing) { %>
-                    <div class="panel panel-default">
-                      <div id="result" class="panel-group">
-                        <div class="panel-body">
-                          <div class="media">
-                            <div class="media-left media-middle">
-                              <img
-                                src=""
-                                class="media-object"
-                                style="width: 18em"
-                              />
-                            </div>
-                            <div class="media-body text-center">
-                              <h4 class="media-heading">
-                                <%= listing['item_name'] %>
-                              </h4>
-                              <h4 class="media-heading">
-                                <%=
-                                categories[listing['category_id']-1]['category_name']
-                                %>
-                              </h4>
-                              <h4 class="media-heading">
-                                $<%= listing['price'] %>
-                              </h4>
-                              <p><%= listing['description'] %></p>
-                              <button>CONTACT SELLER</button>
-                            </div>
-                            <div class="media body text-center">
-                              <img />
-                            </div>
-                          </div>
+                <% item.forEach(function(listing) { %>
+                <div class="panel panel-default">
+                  <div id="result" class="panel-group">
+                    <div class="panel-body">
+                      <div class="media">
+                        <div class="media-left media-middle">
+                          <img <% if((listing['image'] != null) && (listing['image'] != "")) { %>
+                            src="/.upload/<%= listing['image']%>"
+                          <% }else{ %>
+                            src ="/images/GTLogo.png" <% } %>
+                                  class="media-object" style="width: 18em" />
+                        </div>
+                        <div class="media-body text-center">
+                          <h4 class="media-heading">
+                            <%= listing['item_name'] %>
+                          </h4>
+                          <h4 class="media-heading">
+                            <%=
+                            categories[listing['category_id']-1]['category_name']
+                            %>
+                          </h4>
+                          <h4 class="media-heading">
+                            $<%= listing['price'] %>
+                          </h4>
+                          <p><%= listing['description'] %></p>
+                          <br />
+
+                          <button
+                            class="btn btn-primary btn-lg"
+                            style="background-color: #320033"
+                            style="width: 35%"
+                          >
+                            Edit Listing
+                          </button>
+                          <br />
+                          <br />
+
+                          <button
+                            class="btn btn-primary btn-lg"
+                            style="background-color: #320033"
+                            style="width: 35%"
+                          >
+                            Delete Listing
+                          </button>
+                        </div>
+                        <div class="media body text-center">
+                          <img />
                         </div>
                       </div>
                     </div>
-                    <% }) %>
                   </div>
                 </div>
+                <% }) %>
               </div>
             </div>
           </div>
