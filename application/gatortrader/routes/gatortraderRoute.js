@@ -5,6 +5,7 @@ var router = express.Router();
 var category_controller = require("../controllers/categoryController");
 var item_controller = require("../controllers/itemController");
 var gatortrader_controller = require("../controllers/gatortraderController");
+var message_controller = require("../controllers/messagesController");
 
 var path = require("path");
 
@@ -70,11 +71,21 @@ router.get(
 
 /* GET messages page */
 router.get(
-  "/messages/:item_id",
-  category_controller.list_all_categories,
-  item_controller.find_item_by_item_id,
-  gatortrader_controller.render_messages
+    "/messages/:item_id/:room_id",
+    message_controller.get_messages,
+    message_controller.get_messageslist,
+    category_controller.list_all_categories,
+    item_controller.find_item_by_item_id,
+    gatortrader_controller.render_messages
 );
+
+ // SEND messages
+router.post(
+    "/messages/:item_id/:room_id",
+    message_controller.post_messages
+);
+
+
 
 /* GET your_listings page */
 router.get(
@@ -94,5 +105,6 @@ router.post(
   //item_controller.validate('createItem'),
   item_controller.newItems
 );
+
 
 module.exports = router;

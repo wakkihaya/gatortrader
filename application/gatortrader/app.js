@@ -4,12 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
-var multer = require('multer');
 
 var aboutRouter = require('./routes/aboutRoute');
 var gatortraderRouter = require('./routes/gatortraderRoute');
 var searchRouter = require('./routes/searchRoute');
 var usersRouter = require('./routes/usersRoute');
+var messageRouter = require('./routes/messageRoute');
 
 var app = express();
 
@@ -31,6 +31,7 @@ app.use('/about', aboutRouter);
 app.use('/search', searchRouter);
 app.use('/users', usersRouter);
 app.use('/', gatortraderRouter);
+app.use('/message',messageRouter);
 
 
 // catch 404 and forward to error handler
