@@ -27,4 +27,12 @@ router.get('/*',
     gatortrader_controller.render_browse
 );
 
+router.get('/:user_id/*',
+    category_controller.list_all_categories,
+    item_controller.search,
+    item_controller.check_if_no_results,
+    gatortrader_controller.render_login_browse
+);
+
+
 module.exports = router;
