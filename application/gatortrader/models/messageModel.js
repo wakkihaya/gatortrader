@@ -80,8 +80,8 @@ MessageModel.postMessage = function(user_id,room_id,sender_id,msg_text, result){
 
 //where で制限し取得したroom_id の一番新しいもののみを取得する。
 
-MessageModel.get_info_room_id = function(user_id,result){
-  sql.query("SELECT * from messages where message_date in (select max(message_date) FROM messages WHERE sender_id = " + user_id + " OR recepient_id = " + user_id + " group by room_id)",function (err,res) {
+MessageModel.get_info_sender_room_id = function(user_id,result){
+  sql.query("SELECT * from messages where message_date in (select max(message_date) FROM messages WHERE sender_id = " + user_id +  " group by room_id)",function (err,res) {
       if (err) {
           console.log('error: ', err);
           result(err, null);
@@ -93,4 +93,19 @@ MessageModel.get_info_room_id = function(user_id,result){
   } );
 };
 
+MessageModel.get_info_recepient_room_id = function(user_id,result){
+    sql.query("SELECT * from messages where message_date in (select max(message_date) FROM messages WHERE recepient_id = " + user_id + " group by room_id)",function (err,res) {
+        if (err) {
+            console.log('error: ', err);
+            result(err, null);
+        }
+        else {
+            console.log("res"+ res);
+            result(null, res);
+        }
+    } );
+};
+
 module.exports = MessageModel;
+
+// ばらばらにするとroom/id がかぶる

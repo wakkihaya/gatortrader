@@ -45,7 +45,7 @@ exports.post_messages = function (req,res,next) {
 };
 
 exports.get_messageslist = function (req,res,next) {
-    MessageModel.get_info_room_id(req.params.item_id,function (err,msglist) {
+    MessageModel.get_info_sender_room_id(req.params.item_id,function (err,msglist) {
         if (err) {
             console.log("error here?");
             res.send(err);
@@ -53,8 +53,20 @@ exports.get_messageslist = function (req,res,next) {
         else {
             console.log("msg");
             console.log(msglist);
-            res.locals.msglist = msglist;
+            res.locals.sender_msglist = msglist;
         }
         next();
+    });
+
+    MessageModel.get_info_recepient_room_id(req.params.item_id,function (err,msglist) {
+        if (err) {
+            console.log("error here?");
+            res.send(err);
+        }
+        else {
+            console.log("msg");
+            console.log(msglist);
+            res.locals.recepient_msglist = msglist;
+        }
     });
 };

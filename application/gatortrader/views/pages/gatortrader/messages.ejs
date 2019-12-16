@@ -240,11 +240,40 @@
                 </div>
               </div>
               <div class="inbox_chat">
-                <% for (var i = 0; i <msglist.length ; i++) { %>
-                 <% var Month = msglist[i]['message_date'].getMonth(); %>
-                 <% var Date =  msglist[i]['message_date'].getDate();%>
-                 <% var time_string = Month + ' / ' + Date;%>
-                <div class="chat_list active_chat">
+
+                <% for (var i = 0; i <sender_msglist.length ; i++) { %>
+                  <% var date = sender_msglist[i]['message_date'].getDate(); %>
+                  <% var month = sender_msglist[i]['message_date'].getMonth(); %>
+                  <% var time_string = month + ' / ' + date; %>
+
+                  <a href="/messages/<%= sender_msglist[i]['sender_id'] %>/<%=sender_msglist[i]['room_id']%>">
+                    <div class="chat_list">
+                      <div class="chat_people">
+                        <div class="chat_img">
+                          <img
+                                  src="https://ptetutorials.com/images/user-profile.png"
+                                  alt="sunil"
+                          />
+                        </div>
+                        <div class="chat_ib">
+                          <h5>Jane Doe 1 <span class="chat_date"><%=time_string%></span></h5>
+                          <p>
+                            <%= sender_msglist[i]['message_text']%>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+
+                    <% }%>
+
+                  <% for (var i = 0; i <recepient_msglist.length ; i++) { %>
+                    <% var date = recepient_msglist[i]['message_date'].getDate(); %>
+                    <% var month = recepient_msglist[i]['message_date'].getMonth(); %>
+                    <% var time_string = month + ' / ' + date; %>
+
+                  <a href="/messages/<%= recepient_msglist[i]['recepient_id'] %>/<%=recepient_msglist[i]['room_id']%>">
+                    <div class="chat_list active_chat">
                   <div class="chat_people">
                     <div class="chat_img">
                       <img
@@ -255,12 +284,13 @@
                     <div class="chat_ib">
                       <h5>John Smith 1 <span class="chat_date"><%= time_string%></span></h5>
                       <p>
-                        <%=msglist[i]['message_text']%>
+                        <%= recepient_msglist[i]['message_text']%>
                       </p>
                     </div>
                   </div>
                 </div>
-                <% } %>
+                  </a>
+                  <% } %>
               </div>
             </div>
 
