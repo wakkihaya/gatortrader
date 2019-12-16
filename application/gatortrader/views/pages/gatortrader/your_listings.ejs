@@ -349,11 +349,11 @@
                     <div class="panel-body">
                       <div class="media">
                         <div class="media-left media-middle">
-                          <img
-                            src=""
-                            class="media-object"
-                            style="width: 18em"
-                          />
+                          <img <% if((listing['image'] != null) && (listing['image'] != "")) { %>
+                            src="/.upload/<%= listing['image']%>"
+                          <% }else{ %>
+                            src ="/images/GTLogo.png" <% } %>
+                                  class="media-object" style="width: 18em" />
                         </div>
                         <div class="media-body text-center">
                           <h4 class="media-heading">
