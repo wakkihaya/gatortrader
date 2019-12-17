@@ -166,6 +166,7 @@
   .type_msg {
     border-top: 1px solid #c4c4c4;
     position: relative;
+    width: 100%;
   }
   .msg_send_btn {
     background: #05728f none repeat scroll 0 0;
@@ -203,18 +204,21 @@
     />
 
     <% include ../../partials/head.ejs %>
-    <title>Gator Trader | <%= item[0]['item_name'] %></title>
+    <title>Gator Trader | </title>
   </head>
   <body>
     <header>
-      <%- include('../../partials/header.ejs', {categories : categories,
+      <%- include('../../partials/headerLoggedIn.ejs', {categories : categories,
       searchTerm : searchTerm}); %>
     </header>
     <div class="container-fluid bg-7">
       <div class="container">
         <h3 class=" text-center">Messages</h3>
+
         <div class="messaging">
           <div class="inbox_msg">
+
+
             <div class="inbox_people">
               <div class="headind_srch">
                 <div class="recent_heading">
@@ -236,7 +240,40 @@
                 </div>
               </div>
               <div class="inbox_chat">
-                <div class="chat_list active_chat">
+
+                <% for (var i = 0; i <sender_msglist.length ; i++) { %>
+                  <% var date = sender_msglist[i]['message_date'].getDate(); %>
+                  <% var month = sender_msglist[i]['message_date'].getMonth(); %>
+                  <% var time_string = month + ' / ' + date; %>
+
+                  <a href="/messages/<%= sender_msglist[i]['sender_id'] %>/<%=sender_msglist[i]['room_id']%>">
+                    <div class="chat_list">
+                      <div class="chat_people">
+                        <div class="chat_img">
+                          <img
+                                  src="https://ptetutorials.com/images/user-profile.png"
+                                  alt="sunil"
+                          />
+                        </div>
+                        <div class="chat_ib">
+                          <h5>Jane Doe 1 <span class="chat_date"><%=time_string%></span></h5>
+                          <p>
+                            <%= sender_msglist[i]['message_text']%>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+
+                    <% }%>
+
+                  <% for (var i = 0; i <recepient_msglist.length ; i++) { %>
+                    <% var date = recepient_msglist[i]['message_date'].getDate(); %>
+                    <% var month = recepient_msglist[i]['message_date'].getMonth(); %>
+                    <% var time_string = month + ' / ' + date; %>
+
+                  <a href="/messages/<%= recepient_msglist[i]['recepient_id'] %>/<%=recepient_msglist[i]['room_id']%>">
+                    <div class="chat_list active_chat">
                   <div class="chat_people">
                     <div class="chat_img">
                       <img
@@ -245,104 +282,57 @@
                       />
                     </div>
                     <div class="chat_ib">
-                      <h5>John Smith 1 <span class="chat_date">Dec 7</span></h5>
+                      <h5>John Smith 1 <span class="chat_date"><%= time_string%></span></h5>
                       <p>
-                        Incoming message, Incoming message, Incoming message,
-                        Incoming message, Incoming message, Incoming message,
+                        <%= recepient_msglist[i]['message_text']%>
                       </p>
                     </div>
                   </div>
                 </div>
-                <div class="chat_list">
-                  <div class="chat_people">
-                    <div class="chat_img">
-                      <img
-                        src="https://ptetutorials.com/images/user-profile.png"
-                        alt="sunil"
-                      />
-                    </div>
-                    <div class="chat_ib">
-                      <h5>Jane Doe 1 <span class="chat_date">Dec 3</span></h5>
-                      <p>
-                        Yes the item is still available. Where do you want to
-                        meet?
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="chat_list">
-                  <div class="chat_people">
-                    <div class="chat_img">
-                      <img
-                        src="https://ptetutorials.com/images/user-profile.png"
-                        alt="sunil"
-                      />
-                    </div>
-                    <div class="chat_ib">
-                      <h5>Jane Doe 2 <span class="chat_date">Dec 1</span></h5>
-                      <p>
-                        Hello I am interested in the item you have for sale.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="chat_list">
-                  <div class="chat_people">
-                    <div class="chat_img">
-                      <img
-                        src="https://ptetutorials.com/images/user-profile.png"
-                        alt="sunil"
-                      />
-                    </div>
-                    <div class="chat_ib">
-                      <h5>
-                        John Smith 2 <span class="chat_date">Nov 27</span>
-                      </h5>
-                      <p>
-                        HELLO GIVE ME THIS ITEM NOW
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="chat_list">
-                  <div class="chat_people">
-                    <div class="chat_img">
-                      <img
-                        src="https://ptetutorials.com/images/user-profile.png"
-                        alt="sunil"
-                      />
-                    </div>
-                    <div class="chat_ib">
-                      <h5>Jane Doe 3 <span class="chat_date">Nov 22</span></h5>
-                      <p>
-                        Would you accept $25 for that sweet table?
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="chat_list">
-                  <div class="chat_people">
-                    <div class="chat_img">
-                      <img
-                        src="https://ptetutorials.com/images/user-profile.png"
-                        alt="sunil"
-                      />
-                    </div>
-                    <div class="chat_ib">
-                      <h5>
-                        John Smith 3 <span class="chat_date">Nov 15</span>
-                      </h5>
-                      <p>
-                        Hi are you able to pick up the item today from my dorm?
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                  </a>
+                  <% } %>
               </div>
             </div>
+
+
+<!--            push したらそのメッセージに移動するようにする-->
+<!--            one main message-->
+
+
+<!--                save to messageArray-->
+                <% var messageArray = []; %>
+
+                <% for(var i = 0; i < senderMessages.length; i++){ %>
+                   <% messageArray.push([senderMessages[i]['message_date'],senderMessages[i]['message_text'],true]); %>
+                <% } %>
+                <% for(var j = 0; j< recepientMessages.length; j++){ %>
+                  <% messageArray.push([recepientMessages[j]['message_date'],recepientMessages[j]['message_text'],false]); %>
+                <% } %>
+
+<!--                sorting-->
+            <%    messageArray.sort(function(a,b) { %>
+            <%    if (a[0] > b[0]){ %>
+            <%      return 1; %>
+            <%    } else { %>
+            <%      return -1; %>
+            <%    } %>
+            <%  }); %>
+
+<!--                input-->
+
             <div class="mesgs">
               <div class="msg_history">
-                <div class="incoming_msg">
+            <% for (var i = 0; i <messageArray.length ; i++) { %>
+
+               <% var hour = messageArray[i][0].getHours();  %>
+               <%   var minute = messageArray[i][0].getMinutes();%>
+               <% var date = messageArray[i][0].getDate();%>
+                  <% var month = messageArray[i][0].getMonth();%>
+
+                  <% var string = hour + ':' + minute + ' | ' + month + '/' + date ;%>
+
+                <% if(messageArray[i][2]){ %>
+                  <div class="incoming_msg">
                   <div class="incoming_msg_img">
                     <img
                       src="https://ptetutorials.com/images/user-profile.png"
@@ -352,64 +342,36 @@
                   <div class="received_msg">
                     <div class="received_withd_msg">
                       <p>
-                        Incoming message, Incoming message, Incoming message,
-                        Incoming message, Incoming message, Incoming message,
+                        <%= messageArray[i][1] %>
                       </p>
-                      <span class="time_date"> 11:01 AM | June 9</span>
+                      <span class="time_date"> <%= string %></span>
                     </div>
                   </div>
                 </div>
-                <div class="outgoing_msg">
+                  <% }else if(!messageArray[i][2]){ %>
+                  <div class="outgoing_msg">
                   <div class="sent_msg">
-                    <p>Outgoing message. This is an outgoing message.</p>
-                    <span class="time_date"> 11:01 AM | June 9</span>
+                    <p>
+                      <%= messageArray[i][1] %>
+                    </p>
+                    <span class="time_date">  <%= string%></span>
                   </div>
                 </div>
-                <div class="incoming_msg">
-                  <div class="incoming_msg_img">
-                    <img
-                      src="https://ptetutorials.com/images/user-profile.png"
-                      alt="sunil"
-                    />
-                  </div>
-                  <div class="received_msg">
-                    <div class="received_withd_msg">
-                      <p>Incoming message Test 123 123</p>
-                      <span class="time_date"> 11:01 AM | Yesterday</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="outgoing_msg">
-                  <div class="sent_msg">
-                    <p>Outgoing message testing 123 123 testing</p>
-                    <span class="time_date"> 11:01 AM | Today</span>
-                  </div>
-                </div>
-                <div class="incoming_msg">
-                  <div class="incoming_msg_img">
-                    <img
-                      src="https://ptetutorials.com/images/user-profile.png"
-                      alt="sunil"
-                    />
-                  </div>
-                  <div class="received_msg">
-                    <div class="received_withd_msg">
-                      <p>
-                        Final incoming message to mimic a real conversation.
-                      </p>
-                      <span class="time_date"> 11:01 AM | Today</span>
-                    </div>
-                  </div>
-                </div>
+
+                <% }} %>
               </div>
+
+<!--                text input-->
+          <form  method="post">
               <div class="type_msg">
                 <div class="input_msg_write">
                   <input
                     type="text"
                     class="write_msg"
                     placeholder="Type a message"
+                    name = "message_text"
                   />
-                  <button class="msg_send_btn" type="button">
+                  <button class="msg_send_btn" type="submit">
                     <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
                   </button>
                 </div>
@@ -423,9 +385,8 @@
                   Meetup points
                 </button>
               </div>
+          </form>
             </div>
-          </div>
-        </div>
       </div>
     </div>
 

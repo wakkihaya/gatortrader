@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    /* Style inputs with type="text", select elements and textareas */
+    input[type=text], select, textarea {
+        width: 100%; /* Full width */
+        /* padding: 12px; Some padding  */
+        border: 1px solid #ccc; /* Gray border */
+        border-radius: 4px; /* Rounded borders */
+        box-sizing: border-box; /* Make sure that padding and width stays in place */
+        /* margin-top: 6px; Add a top margin */
+        margin-bottom: 16px; /* Bottom margin */
+        resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+    }
+
+    /* Style the submit button with a specific background color etc */
+    input[type=submit] {
+        background-color: #320033;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    /* When moving the mouse over the submit button, add a darker green color */
+    input[type=submit]:hover {
+        background-color: #6e0070;
+    }
+
+    /* Add a background color and some padding around the form */
+    .container_chat {
+        border-radius: 5px;
+    }
+</style>
+<head>
+    <% include ../../partials/head.ejs %>
+    <title>Gator Trader | <%= item[0]['item_name'] %></title>
+</head>
+<body>
+<header>
+    <%- include('../../partials/headerLoggedIn.ejs', {categories : categories,
+    searchTerm : searchTerm}); %>
+</header>
+
+<main>
+    <!-- First Container -->
+    <div class="container-fluid bg-7">
+        <div class="container">
+            <% item.forEach(function(listing) { %>
+                <div class="panel panel-default">
+                    <div id="result" class="panel-group">
+                        <div class="panel-body">
+                            <div class="media">
+                                <div class="media-left media-middle">
+                                    <img <% if((listing['image'] != null) && (listing['image']
+                                            != "")) { %> src="/.upload/<%= listing['image']%>" <% }else{
+                                    %> src ="/images/GTLogo.png" <% } %> class="media-object"
+                                                         style="width: 18em" />
+                                </div>
+                                <div class="media-body text-center">
+                                    <h4 class="media-heading"><%= listing['item_name'] %></h4>
+                                    <h4 class="media-heading">
+                                        <%= categories[listing['category_id']-1]['category_name']
+                                        %>
+                                    </h4>
+                                    <h4 class="media-heading">$<%= listing['price'] %></h4>
+                                    <p><%= listing['description'] %></p>
+                                    <button
+                                            type="button"
+                                            class="btn btn-primary btn-lg"
+                                            data-toggle="modal"
+                                            data-target="#myModal"
+                                            style="background-color: #320033;"
+                                            style="width:35%"
+                                    >
+                                        Contact Seller
+                                    </button>
+                                </div>
+                                <div class="media body text-center">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer>
+    <% include ../../partials/footer.ejs %>
+</footer>
+<div
+        class="modal fade"
+        id="myModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel"
+>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="color: black; text-align: center;">
+                Contact Seller
+                <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container_chat">
+                    <form action="/messages/1/2" style="display: block;">
+
+
+                        <label for="message"></label>
+                        <textarea id="message" name="message" placeholder="Send a message to seller..." style="height:200px; color: black;"></textarea>
+
+                        <input type="submit" value="Submit">
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
