@@ -23,7 +23,7 @@
 ## <strong>Failure to do so will result it points be deducted from milestone submissions.</strong><br>
 ## You may store the most of the above in this README.md file. DO NOT Store the SSH key or any keys in this README.md file.
 
-# Required Items (up to M0):
+# Required Items:
     1. http://13.52.75.46/
     2. ubuntu
     3. found in Team05KeyPair.pem 
@@ -36,4 +36,4 @@
         Step 1: Download Team05KeyPair.pem and save it onto your terminal
         Step 2: Take note of both the username and current working address (the address is changed every time the server is stopped/started)
         Step 3: Start Git Bash, and ssh into the AWS server using the following command:
-            ssh -i <filepath to pem file on your terminal> ubuntu@<current working address>
+            ssh -i <filepath to pem file on your terminal> ubuntu@<current working URL/IP address>
